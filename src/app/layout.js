@@ -13,9 +13,50 @@ const inter = Inter({
   variable: "--font-inter",
 });
 
+const siteUrl = "https://joaovcosta.dev";
+const description =
+  "Front-End Engineer at PicPay. Building clean, functional interfaces with Angular, TypeScript, React, and Next.js.";
+
 export const metadata = {
-  title: "João Costa · Front-end Developer",
-  description: "Front-end Engineer at PicPay. Specializing in Angular, TypeScript, and Next.js.",
+  metadataBase: new URL(siteUrl),
+  title: {
+    default: "João Costa · Front-End Engineer",
+    template: "%s · João Costa",
+  },
+  description,
+  keywords: [
+    "João Costa",
+    "Front-End Engineer",
+    "Frontend Developer",
+    "React",
+    "Next.js",
+    "Angular",
+    "TypeScript",
+    "RxJS",
+    "PicPay",
+  ],
+  authors: [{ name: "João Costa", url: siteUrl }],
+  creator: "João Costa",
+  alternates: {
+    canonical: siteUrl,
+  },
+  openGraph: {
+    type: "website",
+    url: siteUrl,
+    siteName: "João Costa",
+    title: "João Costa · Front-End Engineer",
+    description,
+    locale: "en_US",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "João Costa · Front-End Engineer",
+    description,
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
 };
 
 export default function RootLayout({ children }) {
