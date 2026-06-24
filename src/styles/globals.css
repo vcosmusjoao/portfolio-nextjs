@@ -33,7 +33,10 @@ p{
   color: var(--color-text);
 }
 
-@media (orientation: landscape) and (max-height: 600px) {
+/* Hide the hero avatar only on touch devices in landscape with little height
+   (e.g. phones held sideways). `pointer: coarse` keeps it visible on desktop
+   monitors that happen to be short (≤600px), where a mouse is used. */
+@media (orientation: landscape) and (max-height: 600px) and (pointer: coarse) {
   .avatar-landscape-hide {
     display: none !important;
   }

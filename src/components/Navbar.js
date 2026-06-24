@@ -68,7 +68,7 @@ export default function Navbar() {
           >
             <div className="flex justify-between items-center mb-6">
               <div className="text-highlight text-md flex items-center">
-                &lt;joao.dev /&gt;
+                &lt;joaovcosta.dev /&gt;
                 <span className="animate-pulse ml-1">█</span>
               </div>
               <button
@@ -113,7 +113,7 @@ export default function Navbar() {
       >
         <div className="mt-6">
           <div className="text-highlight text-md mb-6 flex items-center">
-            <span className="select-none">&lt;joao.dev /&gt;</span>
+            <span className="select-none">&lt;joaovcosta.dev /&gt;</span>
             <span className="animate-pulse ml-1">█</span>
           </div>
 
