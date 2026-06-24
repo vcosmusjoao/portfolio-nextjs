@@ -31,29 +31,24 @@ Read his full career context for background:
 
 ## Current state (as of June 2026)
 
-Barely started. Only has:
-- `Hero.js` — hero section
-- `Navbar.js` — navigation
-- `useTerminalEffect.ts` + `useTypingEffect.js` — animation hooks
-- No About, Projects, Skills, or Contact sections yet
-- Not deployed anywhere
+**V1 shipped.** Live at `https://www.joaovcosta.dev` (Vercel + Cloudflare domain).
 
-## Definition of "done" (minimum viable portfolio)
+All MVP sections are done:
+- Hero, About, Projects, Skills, Contact
+- Full SEO metadata, OG image, robots.txt, sitemap.xml, favicon
+- Build and lint clean
 
-1. Hero section with name, title, and one-liner
-2. About section — 3-4 sentences about background, PicPay, and goals
-3. Projects section — frontend-challenge-picpay, chatgpt-clone, vizinhelp (with descriptions and GitHub links)
-4. Skills section — Angular, TypeScript, RxJS, React, Next.js, Jest, Nx
-5. Contact section — LinkedIn and GitHub links
-6. Deployed on Vercel with a real URL
-7. All text in English
+Next priorities are in `ROADMAP_V2.md`. Top items:
+1. LinkedIn Post Inspector — verify OG preview
+2. Lighthouse audit — baseline scores
+3. "Download CV" button (PDF)
+4. Google Search Console — indexing
 
 ## What NOT to do
 
-- Do not add sections beyond the 6 listed above before deploying
-- Do not spend time on complex animations before the content is there
 - Do not suggest a backend or database — this is a static portfolio
 - Do not let João start over with a new template or framework
+- Do not add new sections before polishing existing ones
 
 ## Commands
 

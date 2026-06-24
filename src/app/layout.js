@@ -2,6 +2,8 @@ import "../styles/globals.css";
 import Navbar from "@/components/Navbar";
 import { Fira_Code, Inter } from "next/font/google";
 import React from "react";
+import { Analytics } from "@vercel/analytics/next";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 const firaCode = Fira_Code({
   subsets: ["latin"],
@@ -81,6 +83,8 @@ export default function RootLayout({ children }) {
           <Navbar />
           {children}
         </div>
+        <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   );

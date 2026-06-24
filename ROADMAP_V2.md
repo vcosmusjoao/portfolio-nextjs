@@ -15,7 +15,7 @@ is what comes after the site is live.
 | Complete metadata + OpenGraph + Twitter card | SEO | High × S |
 | Add `robots.ts` + `sitemap.ts` | SEO | High × S |
 | Custom favicon + `apple-icon` | UI / Branding | High × S |
-| Add `@vercel/analytics` + Speed Insights | Conversion | High × S |
+| ~~Add `@vercel/analytics` + Speed Insights~~ ✅ Done | Conversion | High × S |
 | Remove template dead code & unused assets (see AUDIT cleanup list) | Tech refactor | Med × S |
 | Add a "Download CV / Resume" button (PDF) | Recruiter | High × S |
 
