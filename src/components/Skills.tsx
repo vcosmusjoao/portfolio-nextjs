@@ -24,7 +24,7 @@ export default function Skills() {
         {skills.map(({ category, items }) => (
           <div key={category}>
             <p className="font-fira-code text-text/60 text-sm mb-3">
-              // {category}
+              {'// '}{category}
             </p>
             <div className="flex flex-wrap gap-3">
               {items.map((skill) => (

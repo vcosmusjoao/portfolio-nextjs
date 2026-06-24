@@ -45,7 +45,8 @@ export default function useTerminalEffect(lines: string[], speed = 40, delayBetw
       setOutput([]);
       setDone(false);
     };
-  }, []); // <<< roda apenas 1x
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return { output, done };
 }
