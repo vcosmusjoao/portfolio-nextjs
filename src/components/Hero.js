@@ -47,7 +47,7 @@ export default function Hero() {
             <p className="text-text text-sm opacity-80">main stack and current focus</p>
           </div>
           <div className="border border-highlight p-4 rounded-md flex-1">
-            <p className="font-fira-code text-highlight text-lg mb-1">AWS · AI</p>
+            <p className="font-fira-code text-highlight text-lg mb-1">AWS. AI. REACT</p>
             <p className="text-text text-sm opacity-80">currently exploring</p>
           </div>
         </div>
@@ -62,7 +62,7 @@ export default function Hero() {
 
       {/* Right — Profile Image */}
       <motion.div
-        className="flex-1 relative"
+        className="hidden sm:flex flex-1 relative"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.8, delay: 0.3, ease: "easeOut" }}
