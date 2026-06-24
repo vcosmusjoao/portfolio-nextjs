@@ -52,7 +52,7 @@ export default function Hero() {
           </div>
         </div>
 
-        <div className="mt-8 font-fira-code text-highlight text-base leading-relaxed">
+        <div className="mt-8 font-fira-code text-highlight text-base leading-relaxed space-y-2 pr-4 sm:pr-0">
           {output.map((line, i) => (
             <p key={i}>&gt; {line}</p>
           ))}
@@ -73,7 +73,7 @@ export default function Hero() {
           width={360}
           height={360}
           priority
-          className="hidden sm:block absolute right-0 bottom-0 w-40 sm:w-48 md:w-56 lg:w-72 xl:w-80 object-contain pointer-events-none select-none z-30"
+          className="avatar-landscape-hide hidden sm:block absolute right-0 bottom-0 w-40 sm:w-48 md:w-56 lg:w-72 xl:w-80 object-contain pointer-events-none select-none z-30"
         />
         <div
           aria-hidden="true"

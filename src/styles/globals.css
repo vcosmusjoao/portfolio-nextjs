@@ -33,6 +33,12 @@ p{
   color: var(--color-text);
 }
 
+@media (orientation: landscape) and (max-height: 600px) {
+  .avatar-landscape-hide {
+    display: none !important;
+  }
+}
+
 @keyframes fadeInSlide {
   0% {
     opacity: 0;

@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { FaGithub } from "react-icons/fa";
+import { FiExternalLink } from "react-icons/fi";
 
 interface Project {
   name: string;
@@ -15,7 +16,7 @@ const projects: Project[] = [
   {
     name: "Mixórdia",
     description:
-      "Institutional website for a nightlife venue in Brazil. Integrates Supabase for user management and authentication, and connects with Zig's bar tab API to map drink purchases and event attendance, giving the client real behavioral data about their audience.",
+      "Event and culture platform for a nightlife venue in Brazil. Built with Supabase for subscriber management and event image storage, SoundCloud integration for music playback, and a curated showcase of cultural partners.",
     tech: ["React", "Supabase", "SASS"],
     badge: "Freelance",
     image: "/images/projects/mixordia.png",
@@ -25,7 +26,7 @@ const projects: Project[] = [
     name: "vizinhelp",
     description:
       "A community platform connecting neighbors for local mutual aid and services.",
-    tech: ["React", "Next.js", "TypeScript"],
+    tech: ["Angular", "TypeScript"],
     github: "https://github.com/vcosmusjoao/vizinhelp",
     image: "/images/projects/vizinhelp.png",
     badge: "Academic",
@@ -106,9 +107,7 @@ function FeaturedCard({ project }: { project: Project }) {
           )}
         </div>
         {project.github && (
-          <span className="text-highlight/40 text-sm ml-4 shrink-0 group-hover:text-highlight transition-colors">
-            ↗
-          </span>
+          <FiExternalLink className="text-highlight/40 text-lg ml-4 shrink-0 group-hover:text-highlight transition-colors" />
         )}
       </div>
 
@@ -150,7 +149,7 @@ function RegularCard({ project }: { project: Project }) {
         <h3 className="font-fira-code text-highlight text-sm md:text-base group-hover:underline">
           {project.name}
         </h3>
-        <span className="text-text/40 text-sm ml-4 shrink-0">↗</span>
+        <FiExternalLink className="text-text/40 text-lg ml-4 shrink-0 group-hover:text-highlight transition-colors" />
       </div>
       <p className="text-text text-sm leading-relaxed mb-4 opacity-70">
         {project.description}
