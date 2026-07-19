@@ -3,11 +3,30 @@
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { FaGithub, FaLinkedin } from "react-icons/fa";
+import { FiArrowUp } from "react-icons/fi";
 import { usePathname } from "next/navigation";
+import { useLanguage } from "@/i18n/LanguageProvider";
+
+/** Coding-vibe language switch, rendered as a comment that flips value. */
+function LangToggle() {
+  const { lang, toggle } = useLanguage();
+  return (
+    <button
+      type="button"
+      onClick={toggle}
+      aria-label="Toggle language / Alternar idioma"
+      className="font-fira-code text-sm flex items-center gap-1.5 hover:text-highlight transition"
+    >
+      <span className="text-text/40 select-none">{"// lang:"}</span>
+      <span className="text-highlight">{lang}</span>
+    </button>
+  );
+}
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const pathname = usePathname();
+  const { t } = useLanguage();
 
   useEffect(() => {
     setIsOpen(false);
@@ -22,18 +41,18 @@ export default function Navbar() {
   }, []);
 
   const items = [
-    { label: ".home()", href: "/#home" },
-    { label: ".about()", href: "/#about" },
-    { label: ".projects()", href: "/#projects" },
-    { label: ".skills()", href: "/#skills" },
-    { label: ".contact()", href: "/#contact" },
+    { label: t.nav.home, href: "/#home" },
+    { label: t.nav.about, href: "/#about" },
+    { label: t.nav.projects, href: "/#projects" },
+    { label: t.nav.skills, href: "/#skills" },
+    { label: t.nav.contact, href: "/#contact" },
   ];
 
   return (
     <>
       {/* HAMBURGER BUTTON - MOBILE */}
       <button
-        aria-label={isOpen ? "Close menu" : "Open menu"}
+        aria-label={isOpen ? t.ui.closeMenu : t.ui.openMenu}
         aria-expanded={isOpen}
         onClick={() => setIsOpen((s) => !s)}
         className="md:hidden absolute top-4 left-4 z-40 text-text"
@@ -94,13 +113,16 @@ export default function Navbar() {
               ))}
             </ul>
 
-            <div className="mt-6 border-t border-text/10 pt-4 flex gap-4 text-xl">
-              <a href="https://github.com/vcosmusjoao" target="_blank" rel="noreferrer" className="hover:text-highlight transition">
-                <FaGithub />
-              </a>
-              <a href="https://www.linkedin.com/in/joaovcsantos/" target="_blank" rel="noreferrer" className="hover:text-highlight transition">
-                <FaLinkedin />
-              </a>
+            <div className="mt-6 border-t border-text/10 pt-4 flex items-center justify-between">
+              <div className="flex gap-4 text-xl">
+                <a href="https://github.com/vcosmusjoao" target="_blank" rel="noreferrer" className="hover:text-highlight transition">
+                  <FaGithub />
+                </a>
+                <a href="https://www.linkedin.com/in/joaovcsantos/" target="_blank" rel="noreferrer" className="hover:text-highlight transition">
+                  <FaLinkedin />
+                </a>
+              </div>
+              <LangToggle />
             </div>
           </nav>
         </div>
@@ -108,11 +130,11 @@ export default function Navbar() {
 
       {/* DESKTOP SIDEBAR */}
       <aside
-        className="hidden md:flex fixed top-0 left-0 h-full flex-col justify-between p-8 w-56 font-fira-code"
+        className="hidden md:flex fixed top-0 left-0 h-full flex-col justify-between p-8 w-60 font-fira-code"
         aria-hidden={isOpen}
       >
-        <div className="mt-6">
-          <div className="text-highlight text-md mb-6 flex items-center">
+        <div className="mt-8">
+          <div className="text-highlight text-sm mb-10 flex items-center whitespace-nowrap">
             <span className="select-none">&lt;joaovcosta.dev /&gt;</span>
             <span className="animate-pulse ml-1">█</span>
           </div>
@@ -130,13 +152,24 @@ export default function Navbar() {
           </nav>
         </div>
 
-        <div className="flex flex-col gap-4 text-text text-xl mt-6">
-          <a href="https://github.com/vcosmusjoao" target="_blank" rel="noreferrer" className="hover:text-highlight transition">
-            <FaGithub />
-          </a>
-          <a href="https://www.linkedin.com/in/joaovcsantos/" target="_blank" rel="noreferrer" className="hover:text-highlight transition">
-            <FaLinkedin />
-          </a>
+        <div className="flex flex-col gap-4 text-text mt-6">
+          <LangToggle />
+          <div className="flex items-center gap-4 text-xl">
+            <a
+              href="/#home"
+              aria-label={t.ui.backToTop}
+              title={t.ui.backToTop}
+              className="hover:text-highlight transition"
+            >
+              <FiArrowUp />
+            </a>
+            <a href="https://github.com/vcosmusjoao" target="_blank" rel="noreferrer" className="hover:text-highlight transition">
+              <FaGithub />
+            </a>
+            <a href="https://www.linkedin.com/in/joaovcsantos/" target="_blank" rel="noreferrer" className="hover:text-highlight transition">
+              <FaLinkedin />
+            </a>
+          </div>
         </div>
       </aside>
     </>

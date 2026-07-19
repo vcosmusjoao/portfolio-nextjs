@@ -1,16 +1,20 @@
+"use client";
+
 import { FaGithub, FaLinkedin } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
+import { useLanguage } from "@/i18n/LanguageProvider";
 
 export default function Contact() {
+  const { t } = useLanguage();
+
   return (
     <section id="contact" className="py-20 max-w-2xl">
       <h2 className="font-fira-code text-highlight text-2xl md:text-3xl mb-8">
-        .contact()
+        {t.contact.heading}
       </h2>
 
       <p className="text-text text-base md:text-lg leading-relaxed mb-8 opacity-80">
-        Always curious about interesting problems and the people solving them.
-        If you want to talk tech, collaboration, or what&apos;s next, reach out.
+        {t.contact.intro}
       </p>
 
       <div className="flex flex-col gap-4">

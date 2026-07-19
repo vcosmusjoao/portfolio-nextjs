@@ -1,5 +1,6 @@
 import "../styles/globals.css";
 import Navbar from "@/components/Navbar";
+import { LanguageProvider } from "@/i18n/LanguageProvider";
 import { Fira_Code, Inter } from "next/font/google";
 import React from "react";
 import { Analytics } from "@vercel/analytics/next";
@@ -80,8 +81,10 @@ export default function RootLayout({ children }) {
             ml-0 md:ml-[15rem]
           "
         >
-          <Navbar />
-          {children}
+          <LanguageProvider>
+            <Navbar />
+            {children}
+          </LanguageProvider>
         </div>
         <Analytics />
         <SpeedInsights />

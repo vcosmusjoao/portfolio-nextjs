@@ -3,18 +3,13 @@
 import React from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
+import { FiDownload } from "react-icons/fi";
 import useTerminalEffect from "@/hooks/useTerminalEffect";
+import { useLanguage } from "@/i18n/LanguageProvider";
 
 export default function Hero() {
-  const { output, done } = useTerminalEffect(
-    [
-      "Currently a Software Engineer at PicPay, one of Brazil's largest digital banks...",
-      "Focused on Angular, TypeScript, and RxJS in production. Now learning React and Next.js...",
-      "Studying AWS and AI on the side. Not everything I build runs in a terminal...",
-    ],
-    60,
-    800
-  );
+  const { t } = useLanguage();
+  const { output, done } = useTerminalEffect(t.hero.terminal, 60, 800);
 
   return (
     <section id="home" className="relative w-full min-h-[calc(100vh-3rem)] flex flex-col md:flex-row">
@@ -26,30 +21,32 @@ export default function Hero() {
         transition={{ duration: 0.6, ease: "easeOut" }}
       >
         <h1 className="font-fira-code text-highlight text-3xl md:text-4xl mb-4 mt-6">
-          Hi, I&apos;m João.
+          {t.hero.greeting}
         </h1>
 
         <p className="text-text text-base md:text-lg leading-relaxed">
-          Front-end developer specializing in Angular and Next.js.
+          {t.hero.tagline1}
         </p>
 
         <p className="text-text text-base md:text-lg leading-relaxed mt-2">
-          Building clean, functional, and minimalist interfaces.
+          {t.hero.tagline2}
         </p>
 
+        <a
+          href={t.hero.cvUrl}
+          download
+          className="mt-6 inline-flex items-center gap-2 font-fira-code text-sm text-highlight border border-highlight px-4 py-2 rounded-md hover:bg-highlight/10 transition-colors"
+        >
+          <FiDownload /> {t.hero.downloadCv}
+        </a>
+
         <div className="mt-8 mb-8 flex flex-col sm:flex-row gap-4">
-          <div className="border border-highlight p-4 rounded-md flex-1">
-            <p className="font-fira-code text-highlight text-lg mb-1">4+ years</p>
-            <p className="text-text text-sm opacity-80">of experience with digital products</p>
-          </div>
-          <div className="border border-highlight p-4 rounded-md flex-1">
-            <p className="font-fira-code text-highlight text-lg mb-1">Angular & Next.js</p>
-            <p className="text-text text-sm opacity-80">main stack and current focus</p>
-          </div>
-          <div className="border border-highlight p-4 rounded-md flex-1">
-            <p className="font-fira-code text-highlight text-lg mb-1">AWS. AI. REACT</p>
-            <p className="text-text text-sm opacity-80">currently exploring</p>
-          </div>
+          {t.hero.stats.map((stat) => (
+            <div key={stat.value} className="border border-highlight p-4 rounded-md flex-1">
+              <p className="font-fira-code text-highlight text-lg mb-1">{stat.value}</p>
+              <p className="text-text text-sm opacity-80">{stat.label}</p>
+            </div>
+          ))}
         </div>
 
         <div className="mt-8 font-fira-code text-highlight text-base leading-relaxed space-y-2 pr-4 sm:pr-0">

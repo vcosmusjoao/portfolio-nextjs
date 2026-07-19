@@ -1,30 +1,27 @@
-const skills = [
-  {
-    category: "Expert",
-    items: ["Angular", "TypeScript", "RxJS", "JavaScript", "HTML/CSS"],
-  },
-  {
-    category: "Learning",
-    items: ["React", "Next.js"],
-  },
-  {
-    category: "Testing & Tooling",
-    items: ["Jest", "Nx", "Git", "Tailwind CSS"],
-  },
-];
+"use client";
+
+import { useLanguage } from "@/i18n/LanguageProvider";
+
+const skillGroups = [
+  { key: "expert", items: ["Angular", "TypeScript", "RxJS", "JavaScript", "HTML/CSS"] },
+  { key: "learning", items: ["React", "Next.js"] },
+  { key: "tooling", items: ["Jest", "Nx", "Git", "Tailwind CSS"] },
+] as const;
 
 export default function Skills() {
+  const { t } = useLanguage();
+
   return (
     <section id="skills" className="py-20 max-w-2xl">
       <h2 className="font-fira-code text-highlight text-2xl md:text-3xl mb-8">
-        .skills()
+        {t.skills.heading}
       </h2>
 
       <div className="space-y-8">
-        {skills.map(({ category, items }) => (
-          <div key={category}>
+        {skillGroups.map(({ key, items }) => (
+          <div key={key}>
             <p className="font-fira-code text-text/60 text-sm mb-3">
-              {'// '}{category}
+              {'// '}{t.skills.categories[key]}
             </p>
             <div className="flex flex-wrap gap-3">
               {items.map((skill) => (

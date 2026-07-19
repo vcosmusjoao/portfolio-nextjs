@@ -1,56 +1,71 @@
+"use client";
+
+import type { ReactNode } from "react";
 import Image from "next/image";
 import { FaGithub } from "react-icons/fa";
 import { FiExternalLink } from "react-icons/fi";
+import { useLanguage } from "@/i18n/LanguageProvider";
+import type { Messages } from "@/i18n/messages";
+import MixordiaCover from "@/components/covers/MixordiaCover";
 
-interface Project {
+type ProjectId = keyof Messages["projects"]["items"];
+
+interface ProjectMeta {
+  id: ProjectId;
   name: string;
-  description: string;
   tech: string[];
   github?: string;
-  badge?: string;
+  live?: string;
   image?: string;
+  /** Renders in place of the screenshot when a static image isn't the best fit. */
+  cover?: () => ReactNode;
   featured?: boolean;
 }
 
-const projects: Project[] = [
+/**
+ * Language-independent project metadata. The translated `description` and
+ * `badge` live in the i18n dictionary, keyed by `id`.
+ */
+const projects: ProjectMeta[] = [
   {
-    name: "Mixórdia",
-    description:
-      "Event and culture platform for a nightlife venue in Brazil. Built with Supabase for subscriber management and event image storage, SoundCloud integration for music playback, and a curated showcase of cultural partners.",
-    tech: ["React", "Supabase", "SASS"],
-    badge: "Freelance",
-    image: "/images/projects/mixordia.png",
+    id: "finlivre",
+    name: "FinLivre",
+    tech: ["Next.js", "React", "TypeScript", "Dexie", "Claude Vision"],
+    github: "https://github.com/vcosmusjoao/finlivre",
+    live: "https://finlivre.vercel.app",
+    image: "/images/projects/finlivre.png",
     featured: true,
   },
   {
+    id: "mixordia",
+    name: "Mixórdia",
+    tech: ["React", "Supabase", "SASS"],
+    cover: () => <MixordiaCover />,
+    featured: true,
+  },
+  {
+    id: "vizinhelp",
     name: "vizinhelp",
-    description:
-      "A community platform connecting neighbors for local mutual aid and services.",
     tech: ["Angular", "TypeScript"],
     github: "https://github.com/vcosmusjoao/vizinhelp",
     image: "/images/projects/vizinhelp.png",
-    badge: "Academic",
   },
   {
+    id: "chatgptClone",
     name: "chatgpt-clone",
-    description:
-      "A ChatGPT-like interface built to practice React state management, streaming responses, and clean UI design.",
     tech: ["React", "Next.js", "TypeScript"],
     github: "https://github.com/vcosmusjoao/chatgpt-clone",
-    badge: "Study",
   },
   {
+    id: "picpayChallenge",
     name: "frontend-challenge-picpay",
-    description:
-      "A frontend technical challenge from PicPay, implementing core banking UI features with Angular and TypeScript.",
     tech: ["Angular", "TypeScript", "RxJS"],
     github: "https://github.com/vcosmusjoao/frontend-challenge-picpay",
-    badge: "Job · Tech Challenge",
   },
 ];
 
 function Placeholder({ size }: { size: "sm" | "lg" }) {
-  const height = size === "lg" ? "h-52" : "h-32";
+  const height = size === "lg" ? "h-44" : "h-32";
   return (
     <div
       className={`w-full ${height} rounded-md mb-4 bg-text/5 border border-text/10 flex items-center justify-center`}
@@ -69,7 +84,7 @@ function ProjectImage({
   name: string;
   size: "sm" | "lg";
 }) {
-  const height = size === "lg" ? "h-52" : "h-32";
+  const height = size === "lg" ? "h-44" : "h-32";
   if (!image) return <Placeholder size={size} />;
   return (
     <div className={`w-full ${height} rounded-md mb-4 overflow-hidden border border-text/10`}>
@@ -84,53 +99,75 @@ function ProjectImage({
   );
 }
 
-function FeaturedCard({ project }: { project: Project }) {
-  const Wrapper = project.github ? "a" : "div";
-  const wrapperProps = project.github
-    ? { href: project.github, target: "_blank", rel: "noreferrer" }
-    : {};
+function FeaturedCard({ project }: { project: ProjectMeta }) {
+  const { t } = useLanguage();
+  const copy = t.projects.items[project.id];
 
   return (
-    <Wrapper
-      {...(wrapperProps as any)}
-      className="block border border-highlight rounded-md p-6 bg-highlight/5 group"
-    >
+    <div className="block border border-highlight rounded-md p-5 bg-highlight/5 h-full flex flex-col">
       <div className="flex items-start justify-between mb-4">
         <div className="flex items-center gap-3 flex-wrap">
-          <h3 className="font-fira-code text-highlight text-lg md:text-xl">
+          <h3 className="font-fira-code text-highlight text-lg">
             {project.name}
           </h3>
-          {project.badge && (
-            <span className="font-fira-code text-xs text-highlight border border-highlight/50 px-2 py-0.5 rounded-full">
-              {project.badge}
-            </span>
-          )}
+          <span className="font-fira-code text-xs text-highlight border border-highlight/50 px-2 py-0.5 rounded-full">
+            {copy.badge}
+          </span>
         </div>
-        {project.github && (
-          <FiExternalLink className="text-highlight/40 text-lg ml-4 shrink-0 group-hover:text-highlight transition-colors" />
-        )}
       </div>
 
-      <ProjectImage image={project.image} name={project.name} size="lg" />
+      {project.cover ? project.cover() : (
+        <ProjectImage image={project.image} name={project.name} size="lg" />
+      )}
 
-      <p className="text-text text-sm md:text-base leading-relaxed mb-5 opacity-80">
-        {project.description}
+      <p className="text-text text-sm leading-relaxed mb-5 opacity-80">
+        {copy.description}
       </p>
-      <div className="flex flex-wrap gap-2">
-        {project.tech.map((t) => (
+
+      <div className="flex flex-wrap items-center gap-2 mt-auto">
+        {project.tech.map((tech) => (
           <span
-            key={t}
+            key={tech}
             className="font-fira-code text-xs text-highlight border border-highlight/40 px-2 py-0.5 rounded"
           >
-            {t}
+            {tech}
           </span>
         ))}
+
+        {(project.live || project.github) && (
+          <span className="flex items-center gap-4 ml-auto pl-2">
+            {project.live && (
+              <a
+                href={project.live}
+                target="_blank"
+                rel="noreferrer"
+                className="flex items-center gap-1 font-fira-code text-xs text-highlight hover:underline"
+              >
+                {t.projects.liveLabel} <FiExternalLink className="text-sm" />
+              </a>
+            )}
+            {project.github && (
+              <a
+                href={project.github}
+                target="_blank"
+                rel="noreferrer"
+                aria-label={`${project.name} on GitHub`}
+                className="text-highlight/70 hover:text-highlight transition-colors"
+              >
+                <FaGithub className="text-base" />
+              </a>
+            )}
+          </span>
+        )}
       </div>
-    </Wrapper>
+    </div>
   );
 }
 
-function RegularCard({ project }: { project: Project }) {
+function RegularCard({ project }: { project: ProjectMeta }) {
+  const { t } = useLanguage();
+  const copy = t.projects.items[project.id];
+
   return (
     <a
       href={project.github}
@@ -140,11 +177,9 @@ function RegularCard({ project }: { project: Project }) {
     >
       <ProjectImage image={project.image} name={project.name} size="sm" />
 
-      {project.badge && (
-        <span className="font-fira-code text-xs text-highlight border border-highlight/50 px-2 py-0.5 rounded-full mb-3 inline-block">
-          {project.badge}
-        </span>
-      )}
+      <span className="font-fira-code text-xs text-highlight border border-highlight/50 px-2 py-0.5 rounded-full mb-3 inline-block">
+        {copy.badge}
+      </span>
       <div className="flex items-start justify-between mb-2">
         <h3 className="font-fira-code text-highlight text-sm md:text-base group-hover:underline">
           {project.name}
@@ -152,15 +187,15 @@ function RegularCard({ project }: { project: Project }) {
         <FiExternalLink className="text-text/40 text-lg ml-4 shrink-0 group-hover:text-highlight transition-colors" />
       </div>
       <p className="text-text text-sm leading-relaxed mb-4 opacity-70">
-        {project.description}
+        {copy.description}
       </p>
       <div className="flex flex-wrap gap-2">
-        {project.tech.map((t) => (
+        {project.tech.map((tech) => (
           <span
-            key={t}
+            key={tech}
             className="font-fira-code text-xs text-highlight border border-highlight/40 px-2 py-0.5 rounded"
           >
-            {t}
+            {tech}
           </span>
         ))}
       </div>
@@ -169,23 +204,26 @@ function RegularCard({ project }: { project: Project }) {
 }
 
 export default function Projects() {
+  const { t } = useLanguage();
   const featured = projects.filter((p) => p.featured);
   const rest = projects.filter((p) => !p.featured);
 
   return (
     <section id="projects" className="py-20 max-w-3xl">
       <h2 className="font-fira-code text-highlight text-2xl md:text-3xl mb-8">
-        .projects()
+        {t.projects.heading}
       </h2>
 
       <div className="flex flex-col gap-6">
-        {featured.map((p) => (
-          <FeaturedCard key={p.name} project={p} />
-        ))}
+        <div className="grid sm:grid-cols-2 gap-6">
+          {featured.map((p) => (
+            <FeaturedCard key={p.id} project={p} />
+          ))}
+        </div>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-2">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
           {rest.map((p) => (
-            <RegularCard key={p.name} project={p} />
+            <RegularCard key={p.id} project={p} />
           ))}
         </div>
       </div>
