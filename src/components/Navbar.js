@@ -43,6 +43,7 @@ export default function Navbar() {
   const items = [
     { label: t.nav.home, href: "/#home" },
     { label: t.nav.about, href: "/#about" },
+    { label: t.nav.experience, href: "/#experience" },
     { label: t.nav.projects, href: "/#projects" },
     { label: t.nav.skills, href: "/#skills" },
     { label: t.nav.contact, href: "/#contact" },
@@ -88,7 +89,7 @@ export default function Navbar() {
             <div className="flex justify-between items-center mb-6">
               <div className="text-highlight text-md flex items-center">
                 &lt;joaovcosta.dev /&gt;
-                <span className="animate-pulse ml-1">█</span>
+                <span className="motion-safe:animate-pulse ml-1">█</span>
               </div>
               <button
                 aria-label="Close"
@@ -115,10 +116,10 @@ export default function Navbar() {
 
             <div className="mt-6 border-t border-text/10 pt-4 flex items-center justify-between">
               <div className="flex gap-4 text-xl">
-                <a href="https://github.com/vcosmusjoao" target="_blank" rel="noreferrer" className="hover:text-highlight transition">
+                <a href="https://github.com/vcosmusjoao" target="_blank" rel="noreferrer" aria-label="GitHub" className="hover:text-highlight transition">
                   <FaGithub />
                 </a>
-                <a href="https://www.linkedin.com/in/joaovcsantos/" target="_blank" rel="noreferrer" className="hover:text-highlight transition">
+                <a href="https://www.linkedin.com/in/joaovcsantos/" target="_blank" rel="noreferrer" aria-label="LinkedIn" className="hover:text-highlight transition">
                   <FaLinkedin />
                 </a>
               </div>
@@ -136,7 +137,7 @@ export default function Navbar() {
         <div className="mt-8">
           <div className="text-highlight text-sm mb-10 flex items-center whitespace-nowrap">
             <span className="select-none">&lt;joaovcosta.dev /&gt;</span>
-            <span className="animate-pulse ml-1">█</span>
+            <span className="motion-safe:animate-pulse ml-1">█</span>
           </div>
 
           <nav className="flex flex-col gap-4 text-text">
@@ -163,10 +164,10 @@ export default function Navbar() {
             >
               <FiArrowUp />
             </a>
-            <a href="https://github.com/vcosmusjoao" target="_blank" rel="noreferrer" className="hover:text-highlight transition">
+            <a href="https://github.com/vcosmusjoao" target="_blank" rel="noreferrer" aria-label="GitHub" className="hover:text-highlight transition">
               <FaGithub />
             </a>
-            <a href="https://www.linkedin.com/in/joaovcsantos/" target="_blank" rel="noreferrer" className="hover:text-highlight transition">
+            <a href="https://www.linkedin.com/in/joaovcsantos/" target="_blank" rel="noreferrer" aria-label="LinkedIn" className="hover:text-highlight transition">
               <FaLinkedin />
             </a>
           </div>

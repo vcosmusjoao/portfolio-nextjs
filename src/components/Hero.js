@@ -53,7 +53,7 @@ export default function Hero() {
           {output.map((line, i) => (
             <p key={i}>&gt; {line}</p>
           ))}
-          {!done && <p className="animate-pulse mt-1">_</p>}
+          {!done && <p className="motion-safe:animate-pulse mt-1">_</p>}
         </div>
       </motion.div>
 

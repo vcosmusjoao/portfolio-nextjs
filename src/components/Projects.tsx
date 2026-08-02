@@ -40,6 +40,7 @@ const projects: ProjectMeta[] = [
     id: "mixordia",
     name: "Mixórdia",
     tech: ["React", "Supabase", "SASS"],
+    live: "https://www.mixordiamusic.com",
     cover: () => <MixordiaCover />,
     featured: true,
   },
@@ -49,18 +50,6 @@ const projects: ProjectMeta[] = [
     tech: ["Angular", "TypeScript"],
     github: "https://github.com/vcosmusjoao/vizinhelp",
     image: "/images/projects/vizinhelp.png",
-  },
-  {
-    id: "chatgptClone",
-    name: "chatgpt-clone",
-    tech: ["React", "Next.js", "TypeScript"],
-    github: "https://github.com/vcosmusjoao/chatgpt-clone",
-  },
-  {
-    id: "picpayChallenge",
-    name: "frontend-challenge-picpay",
-    tech: ["Angular", "TypeScript", "RxJS"],
-    github: "https://github.com/vcosmusjoao/frontend-challenge-picpay",
   },
 ];
 

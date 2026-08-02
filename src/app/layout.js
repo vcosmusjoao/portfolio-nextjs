@@ -62,10 +62,30 @@ export const metadata = {
   },
 };
 
+const personJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: "João Costa",
+  jobTitle: "Front-End Engineer",
+  url: siteUrl,
+  worksFor: {
+    "@type": "Organization",
+    name: "PicPay",
+  },
+  sameAs: [
+    "https://github.com/vcosmusjoao",
+    "https://www.linkedin.com/in/joaovcsantos/",
+  ],
+};
+
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={`${firaCode.variable} ${inter.variable} bg-bg text-text p-4`}>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd) }}
+        />
         <div
           className="
             relative
