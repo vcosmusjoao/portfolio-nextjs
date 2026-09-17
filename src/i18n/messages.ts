@@ -84,6 +84,11 @@ const en = {
         description:
           "Local-first personal finance app that turns messy bank and credit-card statements into one honest picture of your money. Parses OFX deterministically and reads photos/PDFs via Claude Vision (bring-your-own-key, no backend). Projects installments and recurring items into future months, with a 50/30/20 budget view. Everything stays in the browser (IndexedDB). 224 unit tests.",
       },
+      disputeAgent: {
+        badge: "Personal · Live",
+        description:
+          "Agentic system (LangGraph + Claude) that triages card chargebacks end to end: reasons over conflicting signals to recommend fight or accept, then drafts the representment letter itself when fighting, citing only evidence the merchant actually has. FastAPI backend, Next.js frontend, deployed as two services with real rate limiting. Same fraud/chargeback domain I work in at PicPay, tackled here with an LLM agent instead of a rules engine.",
+      },
       mixordia: {
         badge: "Freelance",
         description:
@@ -190,6 +195,11 @@ const pt: Messages = {
         badge: "Pessoal · Online",
         description:
           "App de finanças pessoais local-first que transforma faturas bagunçadas de banco e cartão em uma visão honesta do seu dinheiro. Faz parsing de OFX de forma determinística e lê fotos/PDFs via Claude Vision (chave própria, sem backend). Projeta parcelas e itens recorrentes para meses futuros, com uma visão de orçamento 50/30/20. Tudo fica no navegador (IndexedDB). 224 testes unitários.",
+      },
+      disputeAgent: {
+        badge: "Pessoal · Online",
+        description:
+          "Sistema agente (LangGraph + Claude) que faz a triagem de chargebacks de cartão de ponta a ponta: pondera sinais conflitantes para recomendar contestar ou aceitar e, ao contestar, redige sozinho a carta de representment (contestação), citando só a evidência que o lojista realmente tem. Backend em FastAPI, frontend em Next.js, dois serviços implantados com rate limiting real. Mesmo domínio de fraude/chargeback do meu trabalho no PicPay, aqui resolvido com um agente de IA em vez de um motor de regras.",
       },
       mixordia: {
         badge: "Freelance",

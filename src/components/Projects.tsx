@@ -7,6 +7,7 @@ import { FiExternalLink } from "react-icons/fi";
 import { useLanguage } from "@/i18n/LanguageProvider";
 import type { Messages } from "@/i18n/messages";
 import MixordiaCover from "@/components/covers/MixordiaCover";
+import DisputeCover from "@/components/covers/DisputeCover";
 
 type ProjectId = keyof Messages["projects"]["items"];
 
@@ -34,6 +35,15 @@ const projects: ProjectMeta[] = [
     github: "https://github.com/vcosmusjoao/finlivre",
     live: "https://finlivre.vercel.app",
     image: "/images/projects/finlivre.png",
+    featured: true,
+  },
+  {
+    id: "disputeAgent",
+    name: "Dispute Triage Agent",
+    tech: ["Python", "FastAPI", "LangGraph", "Claude", "Next.js"],
+    github: "https://github.com/vcosmusjoao/dispute-triage-agent",
+    live: "https://dispute-triage-agent.vercel.app",
+    cover: () => <DisputeCover />,
     featured: true,
   },
   {
