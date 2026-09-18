@@ -8,14 +8,10 @@ import { FiPower } from "react-icons/fi";
  */
 export default function MixordiaCover() {
   return (
-    <div className="relative w-full h-44 rounded-md mb-4 overflow-hidden border border-text/10 bg-black flex flex-col items-center justify-center gap-5">
+    <div className="relative w-full h-44 rounded-sm mb-4 overflow-hidden border border-line bg-void flex flex-col items-center justify-center gap-5">
       <div
         aria-hidden="true"
-        className="absolute bottom-0 w-40 h-24 rounded-full"
-        style={{
-          background:
-            "radial-gradient(closest-side, rgba(239,68,68,0.35), transparent)",
-        }}
+        className="absolute bottom-0 w-40 h-24 rounded-full bg-[radial-gradient(closest-side,var(--color-signal-negative),transparent)] opacity-35"
       />
 
       <Image
@@ -29,8 +25,7 @@ export default function MixordiaCover() {
 
       <div
         aria-hidden="true"
-        className="relative z-10 w-9 h-9 rounded-full border-2 border-red-500/70 flex items-center justify-center text-red-500"
-        style={{ boxShadow: "0 0 16px 3px rgba(239,68,68,0.45)" }}
+        className="relative z-10 w-9 h-9 rounded-full border-2 border-signal-negative/70 flex items-center justify-center text-signal-negative shadow-[0_0_16px_3px] shadow-signal-negative/45"
       >
         <FiPower className="text-base" />
       </div>

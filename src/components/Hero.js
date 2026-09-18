@@ -20,36 +20,42 @@ export default function Hero() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, ease: "easeOut" }}
       >
-        <h1 className="font-fira-code text-highlight text-3xl md:text-4xl mb-4 mt-6">
+        <h1 className="font-fira-code text-fg text-3xl md:text-4xl tracking-tight mb-4 mt-6">
           {t.hero.greeting}
         </h1>
 
-        <p className="text-text text-base md:text-lg leading-relaxed">
+        <p className="text-fg-muted text-base md:text-lg leading-relaxed">
           {t.hero.tagline1}
         </p>
 
-        <p className="text-text text-base md:text-lg leading-relaxed mt-2">
+        <p className="text-fg-muted text-base md:text-lg leading-relaxed mt-2">
           {t.hero.tagline2}
         </p>
 
         <a
           href={t.hero.cvUrl}
           download
-          className="mt-6 inline-flex items-center gap-2 font-fira-code text-sm text-highlight border border-highlight px-4 py-2 rounded-md hover:bg-highlight/10 transition-colors"
+          className="mt-6 inline-flex items-center gap-2 font-fira-code text-sm text-accent border border-accent px-4 py-2 rounded-sm hover:bg-accent/10 transition-colors"
         >
           <FiDownload /> {t.hero.downloadCv}
         </a>
 
-        <div className="mt-8 mb-8 flex flex-col sm:flex-row gap-4">
-          {t.hero.stats.map((stat) => (
-            <div key={stat.value} className="border border-highlight p-4 rounded-md flex-1">
-              <p className="font-fira-code text-highlight text-lg mb-1">{stat.value}</p>
-              <p className="text-text text-sm opacity-80">{stat.label}</p>
-            </div>
+        {/* Spec sheet rather than three equal boxes: the `auto` column sizes to
+            the widest value, so every row aligns at any width. */}
+        <dl className="mt-8 mb-8 grid grid-cols-[auto_1fr] gap-x-5 border-t border-line">
+          {t.hero.stats.map((stat, i) => (
+            <React.Fragment key={i}>
+              <dt className="font-fira-code text-fg text-sm py-3 border-b border-line">
+                {stat.value}
+              </dt>
+              <dd className="text-fg-dim text-sm py-3 border-b border-line self-center">
+                {stat.label}
+              </dd>
+            </React.Fragment>
           ))}
-        </div>
+        </dl>
 
-        <div className="mt-8 font-fira-code text-highlight text-base leading-relaxed space-y-2 pr-4 sm:pr-0">
+        <div className="mt-8 font-fira-code text-accent text-base leading-relaxed space-y-2 pr-4 sm:pr-0">
           {output.map((line, i) => (
             <p key={i}>&gt; {line}</p>
           ))}

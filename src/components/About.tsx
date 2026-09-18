@@ -8,11 +8,11 @@ export default function About() {
 
   return (
     <section id="about" className="py-20 max-w-2xl">
-      <h2 className="font-fira-code text-highlight text-2xl md:text-3xl mb-8">
+      <h2 className="section-title text-2xl md:text-3xl mb-8">
         {t.about.heading}
       </h2>
 
-      <div className="space-y-4 text-text text-base md:text-lg leading-relaxed">
+      <div className="space-y-4 text-fg-muted text-base md:text-lg leading-relaxed">
         {t.about.paragraphs.map((paragraph, i) => (
           <p key={i}>
             <RichText>{paragraph}</RichText>

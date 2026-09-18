@@ -15,10 +15,10 @@ function LangToggle() {
       type="button"
       onClick={toggle}
       aria-label="Toggle language / Alternar idioma"
-      className="font-fira-code text-sm flex items-center gap-1.5 hover:text-highlight transition"
+      className="font-fira-code text-sm flex items-center gap-1.5 text-fg-muted hover:text-accent transition"
     >
-      <span className="text-text/40 select-none">{"// lang:"}</span>
-      <span className="text-highlight">{lang}</span>
+      <span className="text-fg-faint select-none">{"// lang:"}</span>
+      <span className="text-accent">{lang}</span>
     </button>
   );
 }
@@ -56,7 +56,7 @@ export default function Navbar() {
         aria-label={isOpen ? t.ui.closeMenu : t.ui.openMenu}
         aria-expanded={isOpen}
         onClick={() => setIsOpen((s) => !s)}
-        className="md:hidden absolute top-4 left-4 z-40 text-text"
+        className="md:hidden absolute top-4 left-4 z-40 text-fg-muted hover:text-accent transition-colors"
       >
         {isOpen ? (
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-6 h-6">
@@ -81,31 +81,31 @@ export default function Navbar() {
               relative z-50 m-auto
               w-[90%] max-w-sm sm:max-w-md
               p-6 sm:p-8
-              bg-bg border border-text/20
+              bg-surface-2 border border-line-strong
               rounded-md shadow-lg font-fira-code
               animate-[fadeInSlide_0.25s_ease-out]
             "
           >
             <div className="flex justify-between items-center mb-6">
-              <div className="text-highlight text-md flex items-center">
+              <div className="text-accent text-md flex items-center">
                 &lt;joaovcosta.dev /&gt;
                 <span className="motion-safe:animate-pulse ml-1">█</span>
               </div>
               <button
                 aria-label="Close"
                 onClick={() => setIsOpen(false)}
-                className="text-text text-xl hover:text-highlight transition"
+                className="text-fg-muted text-xl hover:text-accent transition"
               >
                 ×
               </button>
             </div>
 
-            <ul className="flex flex-col gap-5 text-text">
+            <ul className="flex flex-col gap-5">
               {items.map((item) => (
                 <li key={item.href}>
                   <Link
                     href={item.href}
-                    className="block text-highlight hover:text-text transition"
+                    className="block text-fg-muted hover:text-accent transition"
                     onClick={() => setIsOpen(false)}
                   >
                     {item.label}
@@ -114,12 +114,12 @@ export default function Navbar() {
               ))}
             </ul>
 
-            <div className="mt-6 border-t border-text/10 pt-4 flex items-center justify-between">
+            <div className="mt-6 border-t border-line pt-4 flex items-center justify-between">
               <div className="flex gap-4 text-xl">
-                <a href="https://github.com/vcosmusjoao" target="_blank" rel="noreferrer" aria-label="GitHub" className="hover:text-highlight transition">
+                <a href="https://github.com/vcosmusjoao" target="_blank" rel="noreferrer" aria-label="GitHub" className="text-fg-dim hover:text-accent transition">
                   <FaGithub />
                 </a>
-                <a href="https://www.linkedin.com/in/joaovcsantos/" target="_blank" rel="noreferrer" aria-label="LinkedIn" className="hover:text-highlight transition">
+                <a href="https://www.linkedin.com/in/joaovcsantos/" target="_blank" rel="noreferrer" aria-label="LinkedIn" className="text-fg-dim hover:text-accent transition">
                   <FaLinkedin />
                 </a>
               </div>
@@ -135,17 +135,17 @@ export default function Navbar() {
         aria-hidden={isOpen}
       >
         <div className="mt-8">
-          <div className="text-highlight text-sm mb-10 flex items-center whitespace-nowrap">
+          <div className="text-accent text-sm mb-10 flex items-center whitespace-nowrap">
             <span className="select-none">&lt;joaovcosta.dev /&gt;</span>
             <span className="motion-safe:animate-pulse ml-1">█</span>
           </div>
 
-          <nav className="flex flex-col gap-4 text-text">
+          <nav className="flex flex-col gap-4">
             {items.map((item) => (
               <Link
                 key={item.href}
                 href={item.href}
-                className="hover:text-highlight transition cursor-pointer"
+                className="text-fg-muted hover:text-accent transition cursor-pointer"
               >
                 {item.label}
               </Link>
@@ -153,21 +153,21 @@ export default function Navbar() {
           </nav>
         </div>
 
-        <div className="flex flex-col gap-4 text-text mt-6">
+        <div className="flex flex-col gap-4 mt-6">
           <LangToggle />
           <div className="flex items-center gap-4 text-xl">
             <a
               href="/#home"
               aria-label={t.ui.backToTop}
               title={t.ui.backToTop}
-              className="hover:text-highlight transition"
+              className="text-fg-dim hover:text-accent transition"
             >
               <FiArrowUp />
             </a>
-            <a href="https://github.com/vcosmusjoao" target="_blank" rel="noreferrer" aria-label="GitHub" className="hover:text-highlight transition">
+            <a href="https://github.com/vcosmusjoao" target="_blank" rel="noreferrer" aria-label="GitHub" className="text-fg-dim hover:text-accent transition">
               <FaGithub />
             </a>
-            <a href="https://www.linkedin.com/in/joaovcsantos/" target="_blank" rel="noreferrer" aria-label="LinkedIn" className="hover:text-highlight transition">
+            <a href="https://www.linkedin.com/in/joaovcsantos/" target="_blank" rel="noreferrer" aria-label="LinkedIn" className="text-fg-dim hover:text-accent transition">
               <FaLinkedin />
             </a>
           </div>

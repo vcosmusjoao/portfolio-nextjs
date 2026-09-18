@@ -67,9 +67,9 @@ function Placeholder({ size }: { size: "sm" | "lg" }) {
   const height = size === "lg" ? "h-44" : "h-32";
   return (
     <div
-      className={`w-full ${height} rounded-md mb-4 bg-text/5 border border-text/10 flex items-center justify-center`}
+      className={`w-full ${height} rounded-sm mb-4 bg-surface-3 border border-line flex items-center justify-center`}
     >
-      <FaGithub className="text-text/20 text-3xl" />
+      <FaGithub className="text-fg-faint text-3xl" />
     </div>
   );
 }
@@ -86,7 +86,7 @@ function ProjectImage({
   const height = size === "lg" ? "h-44" : "h-32";
   if (!image) return <Placeholder size={size} />;
   return (
-    <div className={`w-full ${height} rounded-md mb-4 overflow-hidden border border-text/10`}>
+    <div className={`w-full ${height} rounded-sm mb-4 overflow-hidden border border-line`}>
       <Image
         src={image}
         alt={name}
@@ -103,13 +103,13 @@ function FeaturedCard({ project }: { project: ProjectMeta }) {
   const copy = t.projects.items[project.id];
 
   return (
-    <div className="block border border-highlight rounded-md p-5 bg-highlight/5 h-full flex flex-col">
+    <div className="flex flex-col h-full bg-surface-2 border border-line-strong shadow-raise rounded-sm p-5">
       <div className="flex items-start justify-between mb-4">
         <div className="flex items-center gap-3 flex-wrap">
-          <h3 className="font-fira-code text-highlight text-lg">
+          <h3 className="font-fira-code text-fg text-lg">
             {project.name}
           </h3>
-          <span className="font-fira-code text-xs text-highlight border border-highlight/50 px-2 py-0.5 rounded-full">
+          <span className="font-fira-code text-xs text-fg-dim border border-line-strong px-2 py-0.5 rounded-full">
             {copy.badge}
           </span>
         </div>
@@ -119,7 +119,7 @@ function FeaturedCard({ project }: { project: ProjectMeta }) {
         <ProjectImage image={project.image} name={project.name} size="lg" />
       )}
 
-      <p className="text-text text-sm leading-relaxed mb-5 opacity-80">
+      <p className="text-fg-muted text-sm leading-relaxed mb-5">
         {copy.description}
       </p>
 
@@ -127,7 +127,7 @@ function FeaturedCard({ project }: { project: ProjectMeta }) {
         {project.tech.map((tech) => (
           <span
             key={tech}
-            className="font-fira-code text-xs text-highlight border border-highlight/40 px-2 py-0.5 rounded"
+            className="font-fira-code text-xs text-fg-muted bg-surface-3 border border-line-strong px-2 py-0.5 rounded-sm"
           >
             {tech}
           </span>
@@ -140,7 +140,7 @@ function FeaturedCard({ project }: { project: ProjectMeta }) {
                 href={project.live}
                 target="_blank"
                 rel="noreferrer"
-                className="flex items-center gap-1 font-fira-code text-xs text-highlight hover:underline"
+                className="flex items-center gap-1 font-fira-code text-xs text-accent hover:text-accent-bright hover:underline"
               >
                 {t.projects.liveLabel} <FiExternalLink className="text-sm" />
               </a>
@@ -151,7 +151,7 @@ function FeaturedCard({ project }: { project: ProjectMeta }) {
                 target="_blank"
                 rel="noreferrer"
                 aria-label={`${project.name} on GitHub`}
-                className="text-highlight/70 hover:text-highlight transition-colors"
+                className="text-fg-dim hover:text-accent transition-colors"
               >
                 <FaGithub className="text-base" />
               </a>
@@ -172,27 +172,27 @@ function RegularCard({ project }: { project: ProjectMeta }) {
       href={project.github}
       target="_blank"
       rel="noreferrer"
-      className="block border border-text/20 hover:border-highlight rounded-md p-5 transition-colors group"
+      className="block bg-surface-2 border border-line hover:border-accent rounded-sm p-5 transition-colors group"
     >
       <ProjectImage image={project.image} name={project.name} size="sm" />
 
-      <span className="font-fira-code text-xs text-highlight border border-highlight/50 px-2 py-0.5 rounded-full mb-3 inline-block">
+      <span className="font-fira-code text-xs text-fg-dim border border-line-strong px-2 py-0.5 rounded-full mb-3 inline-block">
         {copy.badge}
       </span>
       <div className="flex items-start justify-between mb-2">
-        <h3 className="font-fira-code text-highlight text-sm md:text-base group-hover:underline">
+        <h3 className="font-fira-code text-fg text-sm md:text-base group-hover:underline">
           {project.name}
         </h3>
-        <FiExternalLink className="text-text/40 text-lg ml-4 shrink-0 group-hover:text-highlight transition-colors" />
+        <FiExternalLink className="text-fg-faint text-lg ml-4 shrink-0 group-hover:text-accent transition-colors" />
       </div>
-      <p className="text-text text-sm leading-relaxed mb-4 opacity-70">
+      <p className="text-fg-muted text-sm leading-relaxed mb-4">
         {copy.description}
       </p>
       <div className="flex flex-wrap gap-2">
         {project.tech.map((tech) => (
           <span
             key={tech}
-            className="font-fira-code text-xs text-highlight border border-highlight/40 px-2 py-0.5 rounded"
+            className="font-fira-code text-xs text-fg-muted bg-surface-3 border border-line-strong px-2 py-0.5 rounded-sm"
           >
             {tech}
           </span>
@@ -209,7 +209,7 @@ export default function Projects() {
 
   return (
     <section id="projects" className="py-20 max-w-3xl">
-      <h2 className="font-fira-code text-highlight text-2xl md:text-3xl mb-8">
+      <h2 className="section-title text-2xl md:text-3xl mb-8">
         {t.projects.heading}
       </h2>
 

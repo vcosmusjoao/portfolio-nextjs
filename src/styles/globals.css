@@ -1,12 +1,56 @@
 @import "tailwindcss";
 
-@theme {
-  --color-bg: #0F172A;
-  --color-dark: #0F172A;
-  --color-text: #E2E8F0;
-  --color-regular: #E2E8F0;
-  --color-highlight: #06B6D4;
+/* ---------------------------------------------------------------------------
+   GOVERNING RULE: the accent (cyan) means interaction or a live cursor.
+   Nothing else. Hierarchy comes from size, weight, letter-spacing and the
+   foreground ladder (fg -> fg-muted -> fg-dim -> fg-faint), never from
+   painting more things cyan.
+   --------------------------------------------------------------------------- */
 
+@theme {
+  /* Surfaces, darkest to lightest */
+  --color-void: #080d18;
+  --color-surface-1: #0f172a;
+  --color-surface-2: #131c31;
+  --color-surface-3: #1a2540;
+
+  --color-line: #1e293b;
+  --color-line-strong: #2c3a55;
+
+  /* Foreground ladder */
+  --color-fg: #e2e8f0;
+  --color-fg-muted: #94a3b8;
+  --color-fg-dim: #64748b;
+  --color-fg-faint: #475569;
+
+  /* Accent */
+  --color-accent: #06b6d4;
+  --color-accent-bright: #22d3ee;
+  --color-accent-dim: #0e7490;
+
+  /* Signal colors, hoisted out of the cover components' inline rgba */
+  --color-signal-positive: #34d399;
+  --color-signal-negative: #ef4444;
+
+  /* Legacy aliases, kept so unswept markup keeps compiling */
+  --color-bg: #0f172a;
+  --color-dark: #0f172a;
+  --color-text: #e2e8f0;
+  --color-regular: #e2e8f0;
+  --color-highlight: #06b6d4;
+
+  --radius-xs: 2px;
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --radius-lg: 10px;
+
+  --shadow-hard: 4px 4px 0 0 var(--color-accent);
+  --shadow-hard-sm: 2px 2px 0 0 var(--color-accent);
+  --shadow-raise: 0 1px 0 0 var(--color-line-strong), 0 8px 24px -12px rgb(0 0 0 / 0.6);
+
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
+  --ease-snap: cubic-bezier(0.2, 0, 0, 1);
 }
 
 @theme inline {
@@ -14,28 +58,77 @@
   --font-inter: var(--font-inter);
 }
 
+:root {
+  /* Tailwind v4 has no --duration-* namespace; use duration-[var(--duration-base)] */
+  --duration-fast: 120ms;
+  --duration-base: 220ms;
+  --duration-slow: 600ms;
+}
+
 html {
   scroll-behavior: smooth;
 }
 
 body {
-  background-color: var(--color-bg);
-  color: var(--color-text);
+  background-color: var(--color-void);
+  color: var(--color-fg);
   font-family: var(--font-inter);
   background-image: radial-gradient(circle, rgba(6, 182, 212, 0.06) 1px, transparent 1px);
   background-size: 28px 28px;
 }
-h1, h2, h3, h4, h5, h6 {
-  color: var(--color-highlight);
-  font-family: var(--font-fira-code);
+
+@layer base {
+  a:focus-visible,
+  button:focus-visible,
+  [tabindex]:focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 2px;
+    border-radius: var(--radius-xs);
+  }
 }
-p{
-  color: var(--color-text);
+
+@layer components {
+  /* Section headings. Text sits in --color-fg; the trailing hairline supplies
+     the hierarchy that the old blanket `h1-h6 { color: highlight }` faked. */
+  .section-title {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    font-family: var(--font-fira-code);
+    color: var(--color-fg);
+    letter-spacing: -0.02em;
+  }
+
+  .section-title::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(to right, var(--color-line-strong), transparent);
+  }
+
+  .skip-link {
+    position: absolute;
+    left: -9999px;
+    top: 0;
+    z-index: 100;
+    font-family: var(--font-fira-code);
+    font-size: 0.875rem;
+    padding: 0.5rem 1rem;
+    background-color: var(--color-surface-3);
+    color: var(--color-fg);
+    border: 1px solid var(--color-accent);
+    border-radius: var(--radius-sm);
+  }
+
+  .skip-link:focus {
+    left: 1rem;
+    top: 1rem;
+  }
 }
 
 /* Hide the hero avatar only on touch devices in landscape with little height
    (e.g. phones held sideways). `pointer: coarse` keeps it visible on desktop
-   monitors that happen to be short (≤600px), where a mouse is used. */
+   monitors that happen to be short (<=600px), where a mouse is used. */
 @media (orientation: landscape) and (max-height: 600px) and (pointer: coarse) {
   .avatar-landscape-hide {
     display: none !important;

@@ -5,6 +5,7 @@ import { Fira_Code, Inter } from "next/font/google";
 import React from "react";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
+import { SITE_URL } from "@/lib/site";
 
 const firaCode = Fira_Code({
   subsets: ["latin"],
@@ -16,7 +17,7 @@ const inter = Inter({
   variable: "--font-inter",
 });
 
-const siteUrl = "https://joaovcosta.dev";
+const siteUrl = SITE_URL;
 const description =
   "Front-End Engineer at PicPay. Building clean, functional interfaces with Angular, TypeScript, React, and Next.js.";
 
@@ -81,7 +82,10 @@ const personJsonLd = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={`${firaCode.variable} ${inter.variable} bg-bg text-text p-4`}>
+      <body className={`${firaCode.variable} ${inter.variable} text-fg p-4`}>
+        <a href="#home" className="skip-link">
+          Skip to content
+        </a>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd) }}
@@ -92,8 +96,9 @@ export default function RootLayout({ children }) {
             max-w-5xl
             min-h-[calc(100vh-2rem)]
             mx-auto
-            border-2 border-text/40
-            shadow-[4px_4px_0_0_var(--color-highlight)]
+            bg-surface-1
+            border border-line-strong
+            shadow-hard
             px-6 py-6
             rounded-sm
             overflow-x-hidden
