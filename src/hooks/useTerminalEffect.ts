@@ -1,8 +1,21 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 
-export default function useTerminalEffect(lines: string[], speed = 40, delayBetween = 600) {
+/**
+ * @param onChar called once per typed character; kept in a ref so passing a
+ *   new function does not restart the typing.
+ * @param replayKey change it to type the lines again from the start.
+ */
+export default function useTerminalEffect(
+  lines: string[],
+  speed = 40,
+  delayBetween = 600,
+  onChar?: (char: string) => void,
+  replayKey = 0,
+) {
   const [output, setOutput] = useState<string[]>([]);
   const [done, setDone] = useState(false);
+  const onCharRef = useRef(onChar);
+  onCharRef.current = onChar;
 
   useEffect(() => {
     let lineIndex = 0;
@@ -15,7 +28,7 @@ export default function useTerminalEffect(lines: string[], speed = 40, delayBetw
     // output into the next run's state.
     let cancelled = false;
 
-    setOutput(lines.map(() => "")); // prepara as linhas vazias
+    setOutput(lines.map(() => ""));
 
     const typeNextLine = () => {
       if (cancelled) return;
@@ -29,6 +42,9 @@ export default function useTerminalEffect(lines: string[], speed = 40, delayBetw
       intervalId = setInterval(() => {
         if (cancelled) return;
         charIndex++;
+
+        const typed = currentLine[charIndex - 1];
+        if (typed && typed !== " ") onCharRef.current?.(typed);
 
         setOutput((prev) => {
           const copy = [...prev];
@@ -59,7 +75,7 @@ export default function useTerminalEffect(lines: string[], speed = 40, delayBetw
     };
   // Re-run (and re-type) when the lines change — e.g. on a language switch.
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [lines.join(" "), speed, delayBetween]);
+  }, [lines.join(" "), speed, delayBetween, replayKey]);
 
   return { output, done };
 }

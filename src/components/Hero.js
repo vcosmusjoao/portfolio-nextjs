@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { m } from "framer-motion";
 import { FiDownload } from "react-icons/fi";
@@ -9,10 +9,24 @@ import HeroConstellation from "@/components/visuals/HeroConstellation";
 import TelemetryLabel from "@/components/TelemetryLabel";
 import { HERODASH } from "@/data/constellation";
 import { useLanguage } from "@/i18n/LanguageProvider";
+import { useSound } from "@/audio/SoundProvider";
 
 export default function Hero() {
   const { t } = useLanguage();
-  const { output, done } = useTerminalEffect(t.hero.terminal, 60, 800);
+  const { click, armedCount } = useSound();
+  const terminalRef = useRef(null);
+  const [replay, setReplay] = useState(0);
+
+  // The terminal has usually finished typing before anyone finds the sound
+  // toggle, so switching sound on re-types it once — only if it's on screen,
+  // otherwise the clicks would come from something the visitor can't see.
+  useEffect(() => {
+    if (!armedCount) return;
+    const box = terminalRef.current?.getBoundingClientRect();
+    if (box && box.top < window.innerHeight && box.bottom > 0) setReplay((n) => n + 1);
+  }, [armedCount]);
+
+  const { output, done } = useTerminalEffect(t.hero.terminal, 60, 800, click, replay);
 
   return (
     <section id="home" className="relative w-full min-h-[calc(100vh-3rem)] flex flex-col md:flex-row">
@@ -67,7 +81,10 @@ export default function Hero() {
           ]}
         />
 
-        <div className="mt-8 font-fira-code text-accent text-base leading-relaxed space-y-2 pr-4 sm:pr-0">
+        <div
+          ref={terminalRef}
+          className="mt-8 font-fira-code text-accent text-base leading-relaxed space-y-2 pr-4 sm:pr-0"
+        >
           {output.map((line, i) => (
             <p key={i}>&gt; {line}</p>
           ))}

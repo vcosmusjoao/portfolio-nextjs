@@ -119,6 +119,8 @@ const en = {
     backToTop: "Back to top",
     openMenu: "Open menu",
     closeMenu: "Close menu",
+    soundToggle: "Keyboard sound",
+    bootSkip: "press any key to skip",
   },
 };
 
@@ -232,6 +234,8 @@ const pt: Messages = {
     backToTop: "Voltar ao topo",
     openMenu: "Abrir menu",
     closeMenu: "Fechar menu",
+    soundToggle: "Som do teclado",
+    bootSkip: "pressione qualquer tecla para pular",
   },
 };
 

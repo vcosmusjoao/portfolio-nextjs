@@ -7,6 +7,25 @@ import { FiArrowUp } from "react-icons/fi";
 import { usePathname } from "next/navigation";
 import { m, useScroll } from "framer-motion";
 import { useLanguage } from "@/i18n/LanguageProvider";
+import { useSound } from "@/audio/SoundProvider";
+
+/** Same comment-style switch as the language toggle. Off by default. */
+function SoundToggle() {
+  const { enabled, toggle } = useSound();
+  const { t } = useLanguage();
+  return (
+    <button
+      type="button"
+      onClick={toggle}
+      aria-pressed={enabled}
+      aria-label={t.ui.soundToggle}
+      className="font-fira-code text-sm flex items-center gap-1.5 text-fg-muted hover:text-accent transition"
+    >
+      <span className="text-fg-faint select-none">{"// sound:"}</span>
+      <span className={enabled ? "text-accent" : "text-fg-dim"}>{enabled ? "on" : "off"}</span>
+    </button>
+  );
+}
 
 /** Coding-vibe language switch, rendered as a comment that flips value. */
 function LangToggle() {
@@ -132,7 +151,10 @@ export default function Navbar() {
                   <FaLinkedin />
                 </a>
               </div>
-              <LangToggle />
+              <div className="flex flex-col items-end gap-2">
+                <LangToggle />
+                <SoundToggle />
+              </div>
             </div>
           </nav>
         </div>
@@ -163,7 +185,10 @@ export default function Navbar() {
         </div>
 
         <div className="flex flex-col gap-4 mt-6">
-          <LangToggle />
+          <div className="flex flex-col gap-2">
+            <LangToggle />
+            <SoundToggle />
+          </div>
           <div className="flex items-center gap-4 text-xl">
             <a
               href="/#home"

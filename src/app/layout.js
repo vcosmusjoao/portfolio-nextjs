@@ -7,6 +7,8 @@ import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { SITE_URL } from "@/lib/site";
 import MotionRoot from "@/components/motion/MotionRoot";
+import { SoundProvider } from "@/audio/SoundProvider";
+import BootSequence from "@/components/BootSequence";
 
 const firaCode = Fira_Code({
   subsets: ["latin"],
@@ -109,8 +111,11 @@ export default function RootLayout({ children }) {
         >
           <LanguageProvider>
             <MotionRoot>
-              <Navbar />
-              {children}
+              <SoundProvider>
+                <Navbar />
+                {children}
+                <BootSequence />
+              </SoundProvider>
             </MotionRoot>
           </LanguageProvider>
         </div>
