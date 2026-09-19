@@ -5,9 +5,9 @@ import { FaGavel } from "react-icons/fa";
  * its UI) instead of a screenshot of the demo form - a plain textarea +
  * button doesn't read as a project on its own the way a live badge does.
  */
-export default function DisputeCover() {
+export default function DisputeCover({ className = "h-44" }: { className?: string }) {
   return (
-    <div className="relative w-full h-44 rounded-sm mb-4 overflow-hidden border border-line bg-void flex flex-col items-center justify-center gap-3">
+    <div className={`relative w-full ${className} rounded-sm mb-4 overflow-hidden border border-line bg-void flex flex-col items-center justify-center gap-3`}>
       <div
         aria-hidden="true"
         className="absolute w-40 h-40 rounded-full bg-[radial-gradient(closest-side,var(--color-signal-positive),transparent)] opacity-25"

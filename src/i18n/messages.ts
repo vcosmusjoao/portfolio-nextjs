@@ -83,7 +83,7 @@ const en = {
       finlivre: {
         badge: "Personal · Live",
         description:
-          "Local-first personal finance app that turns messy bank and credit-card statements into one honest picture of your money. Parses OFX deterministically and reads photos/PDFs via Claude Vision (bring-your-own-key, no backend). Projects installments and recurring items into future months, with a 50/30/20 budget view. Everything stays in the browser (IndexedDB). 224 unit tests.",
+          "Local-first personal finance app that turns messy bank and credit-card statements into one honest picture of your money. Parses OFX deterministically and reads photos/PDFs via Claude Vision (bring-your-own-key, no backend). Projects installments and recurring items into future months, with a 50/30/20 budget view. Everything stays in the browser (IndexedDB). 112 unit tests.",
       },
       disputeAgent: {
         badge: "Personal · Live",
@@ -93,14 +93,28 @@ const en = {
       mixordia: {
         badge: "Freelance",
         description:
-          "Event and culture platform for a nightlife venue in Brazil. Built with Supabase for subscriber management and event image storage, SoundCloud integration for music playback, and a curated showcase of cultural partners.",
+          "Signup portal for an electronic-music events brand in Brazil. I took over a half-built React + Flask project, moved it onto Supabase — subscribers, event storage and a locked-down signup function — and built its TV power-on intro and CRT signal effects.",
       },
       vizinhelp: {
         badge: "Academic",
         description:
-          "A community platform connecting neighbors for local mutual aid and services.",
+          "My postgraduate thesis (PUC-RS, 2024): a neighborhood skill-exchange app built end to end — Angular front end, Node/Express API on PostgreSQL, Keycloak auth and CI deploying to AWS EC2.",
       },
     },
+    caseStudyLink: "Case study",
+  },
+  caseStudy: {
+    back: "cd ../projects",
+    context: "context",
+    stack: "stack",
+    decisions: "decisions",
+    considered: "considered",
+    why: "why",
+    outcome: "outcome",
+    retrospective: "retrospective",
+    live: "Live",
+    source: "Source",
+    next: "next project",
   },
   skills: {
     heading: ".skills()",
@@ -197,7 +211,7 @@ const pt: Messages = {
       finlivre: {
         badge: "Pessoal · Online",
         description:
-          "App de finanças pessoais local-first que transforma faturas bagunçadas de banco e cartão em uma visão honesta do seu dinheiro. Faz parsing de OFX de forma determinística e lê fotos/PDFs via Claude Vision (chave própria, sem backend). Projeta parcelas e itens recorrentes para meses futuros, com uma visão de orçamento 50/30/20. Tudo fica no navegador (IndexedDB). 224 testes unitários.",
+          "App de finanças pessoais local-first que transforma faturas bagunçadas de banco e cartão em uma visão honesta do seu dinheiro. Faz parsing de OFX de forma determinística e lê fotos/PDFs via Claude Vision (chave própria, sem backend). Projeta parcelas e itens recorrentes para meses futuros, com uma visão de orçamento 50/30/20. Tudo fica no navegador (IndexedDB). 112 testes unitários.",
       },
       disputeAgent: {
         badge: "Pessoal · Online",
@@ -207,14 +221,28 @@ const pt: Messages = {
       mixordia: {
         badge: "Freelance",
         description:
-          "Plataforma de eventos e cultura para uma casa noturna no Brasil. Construída com Supabase para gestão de assinantes e armazenamento de imagens dos eventos, integração com SoundCloud para reprodução de música e uma vitrine curada de parceiros culturais.",
+          "Portal de inscrição para uma marca de eventos de música eletrônica no Brasil. Assumi um projeto React + Flask pela metade, migrei para o Supabase — inscritos, armazenamento dos eventos e uma função de inscrição trancada — e construí a intro de TV ligando e os efeitos de sinal CRT.",
       },
       vizinhelp: {
         badge: "Acadêmico",
         description:
-          "Uma plataforma comunitária que conecta vizinhos para ajuda mútua e serviços locais.",
+          "Meu TCC da pós-graduação (PUC-RS, 2024): um app de troca de conhecimento entre vizinhos feito de ponta a ponta — front-end em Angular, API Node/Express sobre PostgreSQL, autenticação com Keycloak e CI publicando no AWS EC2.",
       },
     },
+    caseStudyLink: "Estudo de caso",
+  },
+  caseStudy: {
+    back: "cd ../projetos",
+    context: "contexto",
+    stack: "stack",
+    decisions: "decisões",
+    considered: "alternativa",
+    why: "por quê",
+    outcome: "resultado",
+    retrospective: "retrospectiva",
+    live: "No ar",
+    source: "Código",
+    next: "próximo projeto",
   },
   skills: {
     heading: ".habilidades()",

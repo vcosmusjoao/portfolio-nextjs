@@ -1,139 +1,47 @@
 "use client";
 
-import type { ReactNode } from "react";
-import Image from "next/image";
+import Link from "next/link";
 import { m } from "framer-motion";
 import { FaGithub } from "react-icons/fa";
 import { FiExternalLink } from "react-icons/fi";
 import Chip from "@/components/ui/Chip";
+import ProjectCover from "@/components/ProjectCover";
 import Reveal from "@/components/motion/Reveal";
 import { Stagger, StaggerItem } from "@/components/motion/Stagger";
 import { cardHover } from "@/components/motion/variants";
+import { projects, type ProjectMeta } from "@/data/projects";
 import { useLanguage } from "@/i18n/LanguageProvider";
-import type { Messages } from "@/i18n/messages";
-import MixordiaCover from "@/components/covers/MixordiaCover";
-import DisputeCover from "@/components/covers/DisputeCover";
-
-type ProjectId = keyof Messages["projects"]["items"];
-
-interface ProjectMeta {
-  id: ProjectId;
-  name: string;
-  tech: string[];
-  github?: string;
-  live?: string;
-  image?: string;
-  /** Renders in place of the screenshot when a static image isn't the best fit. */
-  cover?: () => ReactNode;
-  featured?: boolean;
-}
 
 /**
- * Language-independent project metadata. The translated `description` and
- * `badge` live in the i18n dictionary, keyed by `id`.
+ * The title link stretches over the whole card via `after:inset-0`, so the
+ * card is clickable with a single accessible name. Live/GitHub links sit
+ * above that overlay (`relative z-10`) instead of nesting anchors.
  */
-const projects: ProjectMeta[] = [
-  {
-    id: "finlivre",
-    name: "FinLivre",
-    tech: ["Next.js", "React", "TypeScript", "Dexie", "Claude Vision"],
-    github: "https://github.com/vcosmusjoao/finlivre",
-    live: "https://finlivre.vercel.app",
-    image: "/images/projects/finlivre.png",
-    featured: true,
-  },
-  {
-    id: "disputeAgent",
-    name: "Dispute Triage Agent",
-    tech: ["Python", "FastAPI", "LangGraph", "Claude", "Next.js"],
-    github: "https://github.com/vcosmusjoao/dispute-triage-agent",
-    live: "https://dispute-triage-agent.vercel.app",
-    cover: () => <DisputeCover />,
-    featured: true,
-  },
-  {
-    id: "mixordia",
-    name: "Mixórdia",
-    tech: ["React", "Supabase", "SASS"],
-    live: "https://www.mixordiamusic.com",
-    cover: () => <MixordiaCover />,
-    featured: true,
-  },
-  {
-    id: "vizinhelp",
-    name: "vizinhelp",
-    tech: ["Angular", "TypeScript"],
-    github: "https://github.com/vcosmusjoao/vizinhelp",
-    image: "/images/projects/vizinhelp.png",
-  },
-];
-
-function Placeholder({ size }: { size: "sm" | "lg" }) {
-  const height = size === "lg" ? "h-44" : "h-32";
-  return (
-    <div
-      className={`w-full ${height} rounded-sm mb-4 bg-surface-3 border border-line flex items-center justify-center`}
-    >
-      <FaGithub className="text-fg-faint text-3xl" />
-    </div>
-  );
-}
-
-function ProjectImage({
-  image,
-  name,
-  size,
-}: {
-  image?: string;
-  name: string;
-  size: "sm" | "lg";
-}) {
-  const height = size === "lg" ? "h-44" : "h-32";
-  if (!image) return <Placeholder size={size} />;
-  // The grid caps cards well below the viewport, so `sizes` has to be stated in
-  // px — without it Next serves 828px into a ~175px box.
-  const sizes =
-    size === "lg"
-      ? "(min-width: 640px) 380px, 92vw"
-      : "(min-width: 1024px) 250px, (min-width: 640px) 380px, 92vw";
-  return (
-    <div className={`w-full ${height} rounded-sm mb-4 overflow-hidden border border-line`}>
-      <Image
-        src={image}
-        alt={name}
-        width={800}
-        height={400}
-        sizes={sizes}
-        className="w-full h-full object-cover object-top"
-      />
-    </div>
-  );
-}
-
-function FeaturedCard({ project }: { project: ProjectMeta }) {
+function ProjectCard({ project, featured }: { project: ProjectMeta; featured: boolean }) {
   const { t } = useLanguage();
   const copy = t.projects.items[project.id];
 
   return (
-    <div className="flex flex-col h-full bg-surface-2 border border-line-strong shadow-raise rounded-sm p-5">
-      <div className="flex items-start justify-between mb-4">
-        <div className="flex items-center gap-3 flex-wrap">
-          <h3 className="font-fira-code text-fg text-lg">
+    <m.article
+      whileHover={cardHover}
+      className={`group relative flex flex-col h-full bg-surface-2 border rounded-sm p-5 transition-colors hover:border-accent ${
+        featured ? "border-line-strong shadow-raise" : "border-line"
+      }`}
+    >
+      <div className="flex items-center gap-3 flex-wrap mb-4">
+        <h3 className={`font-fira-code text-fg ${featured ? "text-lg" : "text-sm md:text-base"}`}>
+          <Link href={`/projects/${project.slug}`} className="after:absolute after:inset-0">
             {project.name}
-          </h3>
-          <span className="font-fira-code text-xs text-fg-dim border border-line-strong px-2 py-0.5 rounded-full">
-            {copy.badge}
-          </span>
-        </div>
+          </Link>
+        </h3>
+        <span className="font-fira-code text-xs text-fg-dim border border-line-strong px-2 py-0.5 rounded-full">
+          {copy.badge}
+        </span>
       </div>
 
-      {project.cover ? project.cover() : (
-        <ProjectImage image={project.image} name={project.name} size="lg" />
-      )}
+      <ProjectCover project={project} size={featured ? "lg" : "sm"} />
 
-      <p className="text-fg-muted text-sm leading-relaxed mb-5">
-        {copy.description}
-      </p>
+      <p className="text-fg-muted text-sm leading-relaxed mb-5">{copy.description}</p>
 
       <div className="flex flex-wrap items-center gap-2 mt-auto">
         {project.tech.map((tech) => (
@@ -141,7 +49,7 @@ function FeaturedCard({ project }: { project: ProjectMeta }) {
         ))}
 
         {(project.live || project.github) && (
-          <span className="flex items-center gap-4 ml-auto pl-2">
+          <span className="relative z-10 flex items-center gap-4 ml-auto pl-2">
             {project.live && (
               <a
                 href={project.live}
@@ -166,42 +74,11 @@ function FeaturedCard({ project }: { project: ProjectMeta }) {
           </span>
         )}
       </div>
-    </div>
-  );
-}
 
-function RegularCard({ project }: { project: ProjectMeta }) {
-  const { t } = useLanguage();
-  const copy = t.projects.items[project.id];
-
-  return (
-    <m.a
-      href={project.github}
-      target="_blank"
-      rel="noreferrer"
-      whileHover={cardHover}
-      className="block h-full bg-surface-2 border border-line hover:border-accent rounded-sm p-5 transition-colors group"
-    >
-      <ProjectImage image={project.image} name={project.name} size="sm" />
-
-      <span className="font-fira-code text-xs text-fg-dim border border-line-strong px-2 py-0.5 rounded-full mb-3 inline-block">
-        {copy.badge}
-      </span>
-      <div className="flex items-start justify-between mb-2">
-        <h3 className="font-fira-code text-fg text-sm md:text-base group-hover:underline">
-          {project.name}
-        </h3>
-        <FiExternalLink className="text-fg-faint text-lg ml-4 shrink-0 group-hover:text-accent transition-colors" />
-      </div>
-      <p className="text-fg-muted text-sm leading-relaxed mb-4">
-        {copy.description}
+      <p aria-hidden="true" className="mt-4 font-fira-code text-xs text-fg-dim group-hover:text-accent transition-colors">
+        {t.projects.caseStudyLink} →
       </p>
-      <div className="flex flex-wrap gap-2">
-        {project.tech.map((tech) => (
-          <Chip key={tech} label={tech} />
-        ))}
-      </div>
-    </m.a>
+    </m.article>
   );
 }
 
@@ -213,24 +90,22 @@ export default function Projects() {
   return (
     <section id="projects" className="py-20 max-w-3xl">
       <Reveal>
-        <h2 className="section-title text-2xl md:text-3xl mb-8">
-          {t.projects.heading}
-        </h2>
+        <h2 className="section-title text-2xl md:text-3xl mb-8">{t.projects.heading}</h2>
       </Reveal>
 
       <div className="flex flex-col gap-6">
         <Stagger className="grid sm:grid-cols-2 gap-6">
           {featured.map((p) => (
             <StaggerItem key={p.id} className="h-full">
-              <FeaturedCard project={p} />
+              <ProjectCard project={p} featured />
             </StaggerItem>
           ))}
         </Stagger>
 
         <Stagger className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
           {rest.map((p) => (
-            <StaggerItem key={p.id}>
-              <RegularCard project={p} />
+            <StaggerItem key={p.id} className="h-full">
+              <ProjectCard project={p} featured={false} />
             </StaggerItem>
           ))}
         </Stagger>

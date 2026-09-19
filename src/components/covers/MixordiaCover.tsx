@@ -6,9 +6,9 @@ import { FiPower } from "react-icons/fi";
  * button) instead of a screenshot of an internal admin page — closer to
  * what actually makes the brand feel alive.
  */
-export default function MixordiaCover() {
+export default function MixordiaCover({ className = "h-44" }: { className?: string }) {
   return (
-    <div className="relative w-full h-44 rounded-sm mb-4 overflow-hidden border border-line bg-void flex flex-col items-center justify-center gap-5">
+    <div className={`relative w-full ${className} rounded-sm mb-4 overflow-hidden border border-line bg-void flex flex-col items-center justify-center gap-5`}>
       <div
         aria-hidden="true"
         className="absolute bottom-0 w-40 h-24 rounded-full bg-[radial-gradient(closest-side,var(--color-signal-negative),transparent)] opacity-35"

@@ -91,7 +91,7 @@ export default function RootLayout({ children }) {
         <script dangerouslySetInnerHTML={{ __html: BOOT_SCRIPT }} />
       </head>
       <body className={`${firaCode.variable} ${inter.variable} text-fg p-4`}>
-        <a href="#home" className="skip-link">
+        <a href="#main" className="skip-link">
           Skip to content
         </a>
         <script
