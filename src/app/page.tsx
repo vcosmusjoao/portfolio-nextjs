@@ -4,17 +4,18 @@ import Experience from "@/components/Experience";
 import Projects from "@/components/Projects";
 import Skills from "@/components/Skills";
 import Contact from "@/components/Contact";
-import FadeIn from "@/components/FadeIn";
 
+/** Each section owns its own entrance — a list-shaped one staggers its items,
+ *  the rest reveal as a block. */
 export default function HomePage() {
   return (
     <main>
       <Hero />
-      <FadeIn><About /></FadeIn>
-      <FadeIn><Experience /></FadeIn>
-      <FadeIn><Projects /></FadeIn>
-      <FadeIn><Skills /></FadeIn>
-      <FadeIn><Contact /></FadeIn>
+      <About />
+      <Experience />
+      <Projects />
+      <Skills />
+      <Contact />
     </main>
   );
 }

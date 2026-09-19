@@ -6,6 +6,7 @@ import React from "react";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { SITE_URL } from "@/lib/site";
+import MotionRoot from "@/components/motion/MotionRoot";
 
 const firaCode = Fira_Code({
   subsets: ["latin"],
@@ -107,8 +108,10 @@ export default function RootLayout({ children }) {
           "
         >
           <LanguageProvider>
-            <Navbar />
-            {children}
+            <MotionRoot>
+              <Navbar />
+              {children}
+            </MotionRoot>
           </LanguageProvider>
         </div>
         <Analytics />

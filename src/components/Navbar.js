@@ -5,6 +5,7 @@ import Link from "next/link";
 import { FaGithub, FaLinkedin } from "react-icons/fa";
 import { FiArrowUp } from "react-icons/fi";
 import { usePathname } from "next/navigation";
+import { m, useScroll } from "framer-motion";
 import { useLanguage } from "@/i18n/LanguageProvider";
 
 /** Coding-vibe language switch, rendered as a comment that flips value. */
@@ -27,6 +28,7 @@ export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const pathname = usePathname();
   const { t } = useLanguage();
+  const { scrollYProgress } = useScroll();
 
   useEffect(() => {
     setIsOpen(false);
@@ -51,6 +53,13 @@ export default function Navbar() {
 
   return (
     <>
+      {/* SCROLL PROGRESS — hairline down the far left edge */}
+      <m.div
+        aria-hidden="true"
+        style={{ scaleY: scrollYProgress }}
+        className="hidden md:block fixed left-0 top-0 z-40 h-full w-px bg-accent origin-top"
+      />
+
       {/* HAMBURGER BUTTON - MOBILE */}
       <button
         aria-label={isOpen ? t.ui.closeMenu : t.ui.openMenu}

@@ -2,7 +2,7 @@
 
 import React from "react";
 import Image from "next/image";
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 import { FiDownload } from "react-icons/fi";
 import useTerminalEffect from "@/hooks/useTerminalEffect";
 import { useLanguage } from "@/i18n/LanguageProvider";
@@ -14,7 +14,7 @@ export default function Hero() {
   return (
     <section id="home" className="relative w-full min-h-[calc(100vh-3rem)] flex flex-col md:flex-row">
       {/* Left — Content */}
-      <motion.div
+      <m.div
         className="flex-1 max-w-xl pt-4 pr-6"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -61,10 +61,10 @@ export default function Hero() {
           ))}
           {!done && <p className="motion-safe:animate-pulse mt-1">_</p>}
         </div>
-      </motion.div>
+      </m.div>
 
       {/* Right — Profile Image */}
-      <motion.div
+      <m.div
         className="hidden sm:flex flex-1 relative"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
@@ -85,7 +85,7 @@ export default function Hero() {
             background: "linear-gradient(0deg, rgba(15,23,42,1) 20%, rgba(15,23,42,0.6) 50%, rgba(15,23,42,0) 100%)",
           }}
         />
-      </motion.div>
+      </m.div>
     </section>
   );
 }

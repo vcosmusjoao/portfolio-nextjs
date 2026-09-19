@@ -2,8 +2,12 @@
 
 import type { ReactNode } from "react";
 import Image from "next/image";
+import { m } from "framer-motion";
 import { FaGithub } from "react-icons/fa";
 import { FiExternalLink } from "react-icons/fi";
+import Reveal from "@/components/motion/Reveal";
+import { Stagger, StaggerItem } from "@/components/motion/Stagger";
+import { cardHover } from "@/components/motion/variants";
 import { useLanguage } from "@/i18n/LanguageProvider";
 import type { Messages } from "@/i18n/messages";
 import MixordiaCover from "@/components/covers/MixordiaCover";
@@ -168,11 +172,12 @@ function RegularCard({ project }: { project: ProjectMeta }) {
   const copy = t.projects.items[project.id];
 
   return (
-    <a
+    <m.a
       href={project.github}
       target="_blank"
       rel="noreferrer"
-      className="block bg-surface-2 border border-line hover:border-accent rounded-sm p-5 transition-colors group"
+      whileHover={cardHover}
+      className="block h-full bg-surface-2 border border-line hover:border-accent rounded-sm p-5 transition-colors group"
     >
       <ProjectImage image={project.image} name={project.name} size="sm" />
 
@@ -198,7 +203,7 @@ function RegularCard({ project }: { project: ProjectMeta }) {
           </span>
         ))}
       </div>
-    </a>
+    </m.a>
   );
 }
 
@@ -209,22 +214,28 @@ export default function Projects() {
 
   return (
     <section id="projects" className="py-20 max-w-3xl">
-      <h2 className="section-title text-2xl md:text-3xl mb-8">
-        {t.projects.heading}
-      </h2>
+      <Reveal>
+        <h2 className="section-title text-2xl md:text-3xl mb-8">
+          {t.projects.heading}
+        </h2>
+      </Reveal>
 
       <div className="flex flex-col gap-6">
-        <div className="grid sm:grid-cols-2 gap-6">
+        <Stagger className="grid sm:grid-cols-2 gap-6">
           {featured.map((p) => (
-            <FeaturedCard key={p.id} project={p} />
+            <StaggerItem key={p.id} className="h-full">
+              <FeaturedCard project={p} />
+            </StaggerItem>
           ))}
-        </div>
+        </Stagger>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        <Stagger className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
           {rest.map((p) => (
-            <RegularCard key={p.id} project={p} />
+            <StaggerItem key={p.id}>
+              <RegularCard project={p} />
+            </StaggerItem>
           ))}
-        </div>
+        </Stagger>
       </div>
     </section>
   );
