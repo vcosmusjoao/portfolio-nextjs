@@ -9,6 +9,7 @@ import { SITE_URL } from "@/lib/site";
 import MotionRoot from "@/components/motion/MotionRoot";
 import { SoundProvider } from "@/audio/SoundProvider";
 import BootSequence from "@/components/BootSequence";
+import { BOOT_SCRIPT } from "@/lib/bootScript";
 
 const firaCode = Fira_Code({
   subsets: ["latin"],
@@ -84,7 +85,11 @@ const personJsonLd = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
+    // The <head> script adds a class to <html> before hydration.
+    <html lang="en" suppressHydrationWarning>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: BOOT_SCRIPT }} />
+      </head>
       <body className={`${firaCode.variable} ${inter.variable} text-fg p-4`}>
         <a href="#home" className="skip-link">
           Skip to content
@@ -114,11 +119,11 @@ export default function RootLayout({ children }) {
               <SoundProvider>
                 <Navbar />
                 {children}
-                <BootSequence />
               </SoundProvider>
             </MotionRoot>
           </LanguageProvider>
         </div>
+        <BootSequence />
         <Analytics />
         <SpeedInsights />
       </body>

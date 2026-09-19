@@ -120,7 +120,6 @@ const en = {
     openMenu: "Open menu",
     closeMenu: "Close menu",
     soundToggle: "Keyboard sound",
-    bootSkip: "press any key to skip",
   },
 };
 
@@ -235,7 +234,6 @@ const pt: Messages = {
     openMenu: "Abrir menu",
     closeMenu: "Fechar menu",
     soundToggle: "Som do teclado",
-    bootSkip: "pressione qualquer tecla para pular",
   },
 };
 
