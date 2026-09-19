@@ -52,7 +52,7 @@ export default function Hero() {
         <a
           href={t.hero.cvUrl}
           download
-          className="mt-6 inline-flex items-center gap-2 font-fira-code text-sm text-accent border border-accent px-4 py-2 rounded-sm hover:bg-accent/10 transition-colors"
+          className="shine mt-6 inline-flex items-center gap-2 font-fira-code text-sm text-accent border border-accent px-4 py-2 rounded-sm hover:bg-accent/10 hover:text-accent-bright hover:border-accent-bright"
         >
           <FiDownload /> {t.hero.downloadCv}
         </a>

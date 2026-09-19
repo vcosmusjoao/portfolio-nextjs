@@ -24,7 +24,7 @@ function ProjectCard({ project, featured }: { project: ProjectMeta; featured: bo
   return (
     <m.article
       whileHover={cardHover}
-      className={`group relative flex flex-col h-full bg-surface-2 border rounded-sm p-5 transition-colors hover:border-accent ${
+      className={`group relative flex flex-col h-full bg-surface-2 border rounded-sm p-5 transition-[border-color,box-shadow] duration-[var(--duration-base)] hover:border-accent hover:shadow-[0_0_0_1px_rgb(6_182_212/0.12),0_12px_36px_-14px_rgb(6_182_212/0.55)] ${
         featured ? "border-line-strong shadow-raise" : "border-line"
       }`}
     >
