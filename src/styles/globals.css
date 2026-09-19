@@ -193,7 +193,8 @@ html.boot-skip .boot-cover {
   inset: 0;
   background-color: var(--color-void);
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.09'/%3E%3C/svg%3E");
-  animation: boot-reveal 1.1s cubic-bezier(0.65, 0, 0.35, 1) 0.3s forwards;
+  /* bootScript.ts clears the cover on this animation's animationend */
+  animation: boot-reveal 1.5s cubic-bezier(0.65, 0, 0.35, 1) 1s forwards;
 }
 
 /* The scanline — the panel's top edge */
@@ -208,7 +209,7 @@ html.boot-skip .boot-cover {
   box-shadow:
     0 0 16px 3px var(--color-accent),
     0 0 60px 14px rgb(6 182 212 / 0.35);
-  animation: boot-flicker 0.3s linear forwards;
+  animation: boot-flicker 0.5s linear forwards;
 }
 
 /* Phosphor glow on the freshly drawn band just above the line */
@@ -235,22 +236,22 @@ html.boot-skip .boot-cover {
   background: var(--color-surface-2);
   border: 1px solid var(--color-line-strong);
   border-radius: var(--radius-sm);
-  /* Gone before the line reaches it (~0.9s at 58%) */
-  animation: boot-log-out 0.2s ease-out 0.68s forwards;
+  /* Gone before the line reaches it (~1.8s at 58%) */
+  animation: boot-log-out 0.25s ease-out 1.35s forwards;
 }
 
 .boot-log p {
   opacity: 0;
-  animation: boot-log-in 0.18s ease-out forwards;
+  animation: boot-log-in 0.2s ease-out 0.1s forwards;
 }
 
 .boot-log p:nth-child(2) {
-  animation-delay: 0.12s;
+  animation-delay: 0.45s;
 }
 
 .boot-log p:nth-child(3) {
   color: var(--color-accent);
-  animation-delay: 0.24s;
+  animation-delay: 0.8s;
 }
 
 @keyframes boot-reveal {

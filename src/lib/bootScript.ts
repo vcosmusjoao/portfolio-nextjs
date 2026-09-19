@@ -19,12 +19,21 @@ export const BOOT_SCRIPT = `(function () {
     var done = function () {
       root.classList.remove("booting", "boot-skip");
       events.forEach(function (e) { removeEventListener(e, skip); });
+      document.removeEventListener("animationend", onEnd);
     };
     var skip = function () {
       root.classList.add("boot-skip");
       setTimeout(done, 250);
     };
+    // Clean up when the sweep actually finishes. The animation starts at first
+    // paint, which on a slow connection can be well after this script runs, so
+    // a timer counted from here could cut the sweep off mid-screen.
+    var onEnd = function (e) {
+      if (e.animationName === "boot-reveal") done();
+    };
+    document.addEventListener("animationend", onEnd);
     events.forEach(function (e) { addEventListener(e, skip, { passive: true }); });
-    setTimeout(done, 1600);
+    // Safety net only, in case animationend never fires.
+    setTimeout(done, 8000);
   } catch (e) {}
 })();`;
