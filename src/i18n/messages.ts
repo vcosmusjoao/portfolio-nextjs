@@ -31,6 +31,7 @@ const en = {
       { value: "Angular & TypeScript", label: "main stack in production" },
       { value: "React. Next.js. AWS.", label: "currently exploring" },
     ],
+    telemetry: { modules: "modules", squads: "squads", products: "products" },
     terminal: [
       "Currently a Software Engineer at PicPay, one of Brazil's largest digital banks...",
       "Focused on Angular, TypeScript, and RxJS in production. Now learning React and Next.js...",
@@ -143,6 +144,7 @@ const pt: Messages = {
       { value: "Angular & TypeScript", label: "stack principal em produção" },
       { value: "React. Next.js. AWS.", label: "explorando atualmente" },
     ],
+    telemetry: { modules: "módulos", squads: "squads", products: "produtos" },
     terminal: [
       "Atualmente Engenheiro de Software no PicPay, um dos maiores bancos digitais do Brasil...",
       "Focado em Angular, TypeScript e RxJS em produção. Agora aprendendo React e Next.js...",

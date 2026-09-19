@@ -1,5 +1,6 @@
 "use client";
 
+import Chip from "@/components/ui/Chip";
 import Reveal from "@/components/motion/Reveal";
 import { Stagger, StaggerItem } from "@/components/motion/Stagger";
 import { useLanguage } from "@/i18n/LanguageProvider";
@@ -29,12 +30,7 @@ export default function Skills() {
             </p>
             <div className="flex flex-wrap gap-3">
               {items.map((skill) => (
-                <span
-                  key={skill}
-                  className="font-fira-code text-sm text-fg-muted bg-surface-2 border border-line-strong px-3 py-1.5 rounded-sm"
-                >
-                  {skill}
-                </span>
+                <Chip key={skill} label={skill} size="md" />
               ))}
             </div>
           </StaggerItem>

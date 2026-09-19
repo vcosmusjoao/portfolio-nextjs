@@ -5,6 +5,7 @@ import Image from "next/image";
 import { m } from "framer-motion";
 import { FaGithub } from "react-icons/fa";
 import { FiExternalLink } from "react-icons/fi";
+import Chip from "@/components/ui/Chip";
 import Reveal from "@/components/motion/Reveal";
 import { Stagger, StaggerItem } from "@/components/motion/Stagger";
 import { cardHover } from "@/components/motion/variants";
@@ -89,6 +90,12 @@ function ProjectImage({
 }) {
   const height = size === "lg" ? "h-44" : "h-32";
   if (!image) return <Placeholder size={size} />;
+  // The grid caps cards well below the viewport, so `sizes` has to be stated in
+  // px — without it Next serves 828px into a ~175px box.
+  const sizes =
+    size === "lg"
+      ? "(min-width: 640px) 380px, 92vw"
+      : "(min-width: 1024px) 250px, (min-width: 640px) 380px, 92vw";
   return (
     <div className={`w-full ${height} rounded-sm mb-4 overflow-hidden border border-line`}>
       <Image
@@ -96,6 +103,7 @@ function ProjectImage({
         alt={name}
         width={800}
         height={400}
+        sizes={sizes}
         className="w-full h-full object-cover object-top"
       />
     </div>
@@ -129,12 +137,7 @@ function FeaturedCard({ project }: { project: ProjectMeta }) {
 
       <div className="flex flex-wrap items-center gap-2 mt-auto">
         {project.tech.map((tech) => (
-          <span
-            key={tech}
-            className="font-fira-code text-xs text-fg-muted bg-surface-3 border border-line-strong px-2 py-0.5 rounded-sm"
-          >
-            {tech}
-          </span>
+          <Chip key={tech} label={tech} />
         ))}
 
         {(project.live || project.github) && (
@@ -195,12 +198,7 @@ function RegularCard({ project }: { project: ProjectMeta }) {
       </p>
       <div className="flex flex-wrap gap-2">
         {project.tech.map((tech) => (
-          <span
-            key={tech}
-            className="font-fira-code text-xs text-fg-muted bg-surface-3 border border-line-strong px-2 py-0.5 rounded-sm"
-          >
-            {tech}
-          </span>
+          <Chip key={tech} label={tech} />
         ))}
       </div>
     </m.a>

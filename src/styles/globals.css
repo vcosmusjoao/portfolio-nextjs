@@ -124,6 +124,71 @@ body {
     left: 1rem;
     top: 1rem;
   }
+
+  /* Hero constellation. Weight reads through radius and opacity in a single
+     hue — the accent marks only the core and the travelling pulses. */
+  .constellation-rings circle {
+    stroke: var(--color-line);
+    stroke-width: 1;
+  }
+
+  .constellation-edges line {
+    stroke: var(--color-line-strong);
+    stroke-width: 1;
+    opacity: 0.45;
+  }
+
+  .constellation-module,
+  .constellation-squad {
+    animation: node-breathe 4s ease-in-out infinite;
+    animation-delay: calc(var(--i) * -37ms);
+  }
+
+  .constellation-module {
+    fill: var(--color-fg-faint);
+  }
+
+  .constellation-squad {
+    fill: var(--color-accent-dim);
+  }
+
+  .constellation-core {
+    fill: var(--color-accent);
+    filter: drop-shadow(0 0 6px var(--color-accent));
+  }
+
+  .constellation-edges line.constellation-pulse {
+    stroke: var(--color-accent);
+    opacity: 0.85;
+    stroke-dasharray: 5 95;
+    animation: edge-pulse 3.2s linear infinite;
+    animation-delay: calc(var(--i) * -120ms);
+  }
+}
+
+@keyframes node-breathe {
+  0%,
+  100% {
+    opacity: 0.3;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+@keyframes edge-pulse {
+  from {
+    stroke-dashoffset: 100;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .constellation * {
+    animation: none !important;
+  }
 }
 
 /* Hide the hero avatar only on touch devices in landscape with little height

@@ -5,6 +5,9 @@ import Image from "next/image";
 import { m } from "framer-motion";
 import { FiDownload } from "react-icons/fi";
 import useTerminalEffect from "@/hooks/useTerminalEffect";
+import HeroConstellation from "@/components/visuals/HeroConstellation";
+import TelemetryLabel from "@/components/TelemetryLabel";
+import { HERODASH } from "@/data/constellation";
 import { useLanguage } from "@/i18n/LanguageProvider";
 
 export default function Hero() {
@@ -15,7 +18,7 @@ export default function Hero() {
     <section id="home" className="relative w-full min-h-[calc(100vh-3rem)] flex flex-col md:flex-row">
       {/* Left — Content */}
       <m.div
-        className="flex-1 max-w-xl pt-4 pr-6"
+        className="relative z-10 flex-1 max-w-xl pt-4 pr-6"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, ease: "easeOut" }}
@@ -55,6 +58,15 @@ export default function Hero() {
           ))}
         </dl>
 
+        <TelemetryLabel
+          className="-mt-4 mb-8"
+          items={[
+            `${HERODASH.modules} ${t.hero.telemetry.modules}`,
+            `${HERODASH.squads}+ ${t.hero.telemetry.squads}`,
+            `${HERODASH.products} ${t.hero.telemetry.products}`,
+          ]}
+        />
+
         <div className="mt-8 font-fira-code text-accent text-base leading-relaxed space-y-2 pr-4 sm:pr-0">
           {output.map((line, i) => (
             <p key={i}>&gt; {line}</p>
@@ -63,18 +75,20 @@ export default function Hero() {
         </div>
       </m.div>
 
-      {/* Right — Profile Image */}
+      {/* Right — the monorepo drawn from its real shape, with the avatar in front */}
       <m.div
-        className="hidden sm:flex flex-1 relative"
+        className="relative flex flex-1 items-start justify-center min-h-[300px] md:min-h-0 md:justify-end"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.8, delay: 0.3, ease: "easeOut" }}
       >
+        <HeroConstellation className="pointer-events-none w-[280px] opacity-75 sm:w-[330px] md:w-[360px] md:opacity-100 lg:w-[440px]" />
         <Image
           src="/images/profile/b3a4c130-2390-4dc3-95f1-2b305cf14c2e.png"
           alt="João Costa"
           width={360}
           height={360}
+          sizes="(min-width: 1280px) 320px, (min-width: 1024px) 288px, (min-width: 768px) 224px, 192px"
           priority
           className="avatar-landscape-hide hidden sm:block absolute right-0 bottom-0 w-40 sm:w-48 md:w-56 lg:w-72 xl:w-80 object-contain pointer-events-none select-none z-30"
         />
