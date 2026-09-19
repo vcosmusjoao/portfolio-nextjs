@@ -14,9 +14,11 @@ import { projects, type ProjectMeta } from "@/data/projects";
 import { caseStudies } from "@/i18n/caseStudies";
 import { useLanguage } from "@/i18n/LanguageProvider";
 
-function Section({ title, children }: { title: string; children: ReactNode }) {
+type CaseStudySection = "context" | "stack" | "decisions" | "outcome" | "retrospective";
+
+function Section({ id, title, children }: { id: CaseStudySection; title: string; children: ReactNode }) {
   return (
-    <section className="mt-16">
+    <section id={id} className="mt-16 scroll-mt-8">
       <Reveal>
         <h2 className="section-title text-xl md:text-2xl mb-6">{title}</h2>
       </Reveal>
@@ -78,7 +80,7 @@ export default function CaseStudy({ project }: { project: ProjectMeta }) {
         <ProjectCover project={project} size="xl" />
       </Reveal>
 
-      <Section title={t.caseStudy.context}>
+      <Section id="context" title={t.caseStudy.context}>
         <div className="space-y-4 text-fg-muted text-base leading-relaxed">
           {cs.context.map((paragraph, i) => (
             <p key={i}>
@@ -88,7 +90,7 @@ export default function CaseStudy({ project }: { project: ProjectMeta }) {
         </div>
       </Section>
 
-      <Section title={t.caseStudy.stack}>
+      <Section id="stack" title={t.caseStudy.stack}>
         <div className="flex flex-wrap gap-3">
           {project.tech.map((tech) => (
             <Chip key={tech} label={tech} size="md" />
@@ -96,7 +98,7 @@ export default function CaseStudy({ project }: { project: ProjectMeta }) {
         </div>
       </Section>
 
-      <Section title={t.caseStudy.decisions}>
+      <Section id="decisions" title={t.caseStudy.decisions}>
         <Stagger className="flex flex-col gap-4">
           {cs.decisions.map((decision, i) => (
             <StaggerItem
@@ -124,7 +126,7 @@ export default function CaseStudy({ project }: { project: ProjectMeta }) {
         </Stagger>
       </Section>
 
-      <Section title={t.caseStudy.outcome}>
+      <Section id="outcome" title={t.caseStudy.outcome}>
         <ul className="space-y-3">
           {cs.outcome.map((item, i) => (
             <li key={i} className="flex gap-3 text-fg-muted text-base leading-relaxed">
@@ -138,7 +140,7 @@ export default function CaseStudy({ project }: { project: ProjectMeta }) {
       </Section>
 
       {cs.retrospective && (
-        <Section title={t.caseStudy.retrospective}>
+        <Section id="retrospective" title={t.caseStudy.retrospective}>
           <div className="space-y-4 text-fg-muted text-base leading-relaxed border-l-2 border-line-strong pl-5">
             {cs.retrospective.map((paragraph, i) => (
               <p key={i}>
