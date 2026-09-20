@@ -126,10 +126,10 @@ export default function Hero() {
           <Image
             src="/images/profile/b3a4c130-2390-4dc3-95f1-2b305cf14c2e.png"
             alt="João Costa"
-            width={200}
-            height={200}
-            sizes="140px"
-            className="mt-4 w-28 object-contain pointer-events-none select-none opacity-90 sm:hidden"
+            width={260}
+            height={260}
+            sizes="180px"
+            className="mt-4 w-40 object-contain pointer-events-none select-none sm:hidden"
           />
         </div>
         <Image
@@ -143,7 +143,7 @@ export default function Hero() {
         />
         <div
           aria-hidden="true"
-          className="absolute right-0 bottom-0 w-40 sm:w-48 md:w-56 lg:w-72 xl:w-80 h-28 pointer-events-none z-20"
+          className="hidden sm:block absolute right-0 bottom-0 w-40 sm:w-48 md:w-56 lg:w-72 xl:w-80 h-28 pointer-events-none z-20"
           style={{
             background: "linear-gradient(0deg, rgba(15,23,42,1) 20%, rgba(15,23,42,0.6) 50%, rgba(15,23,42,0) 100%)",
           }}

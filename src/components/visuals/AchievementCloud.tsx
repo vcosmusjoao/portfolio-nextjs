@@ -273,7 +273,7 @@ export default function AchievementCloud({ className = "" }: { className?: strin
 
     {/* Mobile only: floating labels under each node collide at this size
         (see className below), so the names live in a plain list instead. */}
-    <ul className="mt-4 grid w-full max-w-[300px] grid-cols-2 gap-x-4 gap-y-2 font-fira-code text-xs sm:hidden">
+    <ul className="mt-4 flex w-full max-w-[300px] flex-col gap-2.5 font-fira-code text-xs sm:hidden">
       {achievements.map((a) => (
         <li key={a.id}>
           <button
