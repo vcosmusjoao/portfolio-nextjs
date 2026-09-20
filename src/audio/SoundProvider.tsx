@@ -20,8 +20,8 @@ interface SoundContextValue {
   click: () => void;
   /** One note from the scale below, by index — sweeping the cloud plays a tune. */
   note: (index: number) => void;
-  /** A quiet tick for hovering small things like chips. */
-  blip: () => void;
+  /** A small electric crack for hovering small things like chips. */
+  spark: () => void;
   /** Increments each time sound is switched on — lets the hero re-type once. */
   armedCount: number;
 }
@@ -41,9 +41,9 @@ function createAudioContext(): AudioContext | null {
   return Ctor ? new Ctor() : null;
 }
 
-/** A short burst of white noise, reused for every keystroke. */
-function createNoise(ctx: AudioContext): AudioBuffer {
-  const buffer = ctx.createBuffer(1, Math.floor(ctx.sampleRate * 0.03), ctx.sampleRate);
+/** A burst of white noise, reused for keystrokes (short) and sparks (longer). */
+function createNoise(ctx: AudioContext, seconds = 0.03): AudioBuffer {
+  const buffer = ctx.createBuffer(1, Math.floor(ctx.sampleRate * seconds), ctx.sampleRate);
   const data = buffer.getChannelData(0);
   for (let i = 0; i < data.length; i++) data[i] = Math.random() * 2 - 1;
   return buffer;
@@ -80,6 +80,7 @@ export function SoundProvider({ children }: { children: ReactNode }) {
   }, []);
   const ctxRef = useRef<AudioContext | null>(null);
   const noiseRef = useRef<AudioBuffer | null>(null);
+  const sparkNoiseRef = useRef<AudioBuffer | null>(null);
   const lastClickRef = useRef(0);
   const lastNoteRef = useRef(0);
   const lastBlipRef = useRef(0);
@@ -87,7 +88,10 @@ export function SoundProvider({ children }: { children: ReactNode }) {
   const ensureContext = useCallback(() => {
     if (!ctxRef.current) {
       ctxRef.current = createAudioContext();
-      if (ctxRef.current) noiseRef.current = createNoise(ctxRef.current);
+      if (ctxRef.current) {
+        noiseRef.current = createNoise(ctxRef.current);
+        sparkNoiseRef.current = createNoise(ctxRef.current, 0.25);
+      }
     }
     void ctxRef.current?.resume();
     return ctxRef.current;
@@ -175,35 +179,45 @@ export function SoundProvider({ children }: { children: ReactNode }) {
   }, []);
 
   /**
-   * Deliberately quieter and shorter than `note`: chips are everywhere, so
-   * hovering a row of them should whisper, not play a tune.
+   * A small electric crack, so chips don't sound like the cloud's notes: noise
+   * rather than a tone, with a near-instant attack and a bandpass sweeping
+   * from high down to low — that fall is what makes it read as a spark.
    */
-  const blip = useCallback(() => {
+  const spark = useCallback(() => {
     const ctx = ctxRef.current;
-    if (!enabledRef.current || !ctx || ctx.state !== "running") return;
+    const noise = sparkNoiseRef.current;
+    if (!enabledRef.current || !ctx || !noise || ctx.state !== "running") return;
 
     const now = performance.now();
     if (now - lastBlipRef.current < 80) return;
     lastBlipRef.current = now;
 
     const t = ctx.currentTime;
-    const osc = ctx.createOscillator();
-    const filter = ctx.createBiquadFilter();
+    const source = ctx.createBufferSource();
+    source.buffer = noise;
+    source.playbackRate.value = 0.9 + Math.random() * 0.35;
+
+    const band = ctx.createBiquadFilter();
+    band.type = "bandpass";
+    band.Q.value = 0.9;
+    band.frequency.setValueAtTime(5000 + Math.random() * 1800, t);
+    band.frequency.exponentialRampToValueAtTime(650, t + 0.15);
+
+    const highpass = ctx.createBiquadFilter();
+    highpass.type = "highpass";
+    highpass.frequency.value = 350;
+
     const gain = ctx.createGain();
-    osc.type = "triangle";
-    osc.frequency.value = 1280 + Math.random() * 160;
-    filter.type = "lowpass";
-    filter.frequency.value = 2600;
     gain.gain.setValueAtTime(0.0001, t);
-    gain.gain.exponentialRampToValueAtTime(0.018, t + 0.012);
-    gain.gain.exponentialRampToValueAtTime(0.0001, t + 0.12);
-    osc.connect(filter).connect(gain).connect(ctx.destination);
-    osc.start(t);
-    osc.stop(t + 0.14);
+    gain.gain.exponentialRampToValueAtTime(0.055, t + 0.004);
+    gain.gain.exponentialRampToValueAtTime(0.0001, t + 0.19);
+
+    source.connect(band).connect(highpass).connect(gain).connect(ctx.destination);
+    source.start(t);
   }, []);
 
   return (
-    <SoundContext.Provider value={{ enabled, toggle, click, note, blip, armedCount }}>
+    <SoundContext.Provider value={{ enabled, toggle, click, note, spark, armedCount }}>
       {children}
     </SoundContext.Provider>
   );

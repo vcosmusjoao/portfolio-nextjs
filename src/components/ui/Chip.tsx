@@ -92,14 +92,14 @@ export default function Chip({
   label: string;
   size?: "sm" | "md";
 }) {
-  const { blip } = useSound();
+  const { spark } = useSound();
   const Icon = ICONS[label];
   const scale =
     size === "md" ? "text-sm px-3 py-1.5 gap-2" : "text-xs px-2 py-0.5 gap-1.5";
 
   return (
     <span
-      onPointerEnter={blip}
+      onPointerEnter={spark}
       style={{ "--brand": BRAND[label] ?? "var(--color-accent)" } as React.CSSProperties}
       className={`shine group/chip inline-flex items-center font-fira-code text-fg-muted bg-surface-3 border border-line-strong rounded-sm hover:text-fg hover:border-accent/60 hover:bg-surface-2 ${scale}`}
     >
