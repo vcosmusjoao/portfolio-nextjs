@@ -126,10 +126,10 @@ export default function Hero() {
           <Image
             src="/images/profile/b3a4c130-2390-4dc3-95f1-2b305cf14c2e.png"
             alt="João Costa"
-            width={260}
-            height={260}
-            sizes="180px"
-            className="mt-4 w-40 object-contain pointer-events-none select-none sm:hidden"
+            width={320}
+            height={320}
+            sizes="256px"
+            className="mt-4 w-64 object-contain pointer-events-none select-none sm:hidden"
           />
         </div>
         <Image

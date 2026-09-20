@@ -89,11 +89,10 @@ export default function AchievementCloud({ className = "" }: { className?: strin
       : null;
 
   return (
-    <>
     <div
       role="group"
       aria-label={t.achievements.label}
-      className={`relative aspect-square ${selected ? "is-still" : ""} ${className}`}
+      className={`relative aspect-[3/4] sm:aspect-square ${selected ? "is-still" : ""} ${className}`}
     >
       <div aria-hidden="true" className="cloud-nebula pointer-events-none absolute inset-0" />
 
@@ -197,7 +196,7 @@ export default function AchievementCloud({ className = "" }: { className?: strin
             />
             <span
               aria-hidden="true"
-              className={`pointer-events-none absolute left-1/2 top-[78%] hidden w-[6.5rem] -translate-x-1/2 text-center font-fira-code text-[11px] leading-tight transition-colors sm:block ${
+              className={`pointer-events-none absolute left-1/2 top-[78%] w-16 -translate-x-1/2 text-center font-fira-code text-[9px] leading-tight transition-colors sm:w-[6.5rem] sm:text-[11px] ${
                 isOpen ? "text-accent" : "text-fg-muted group-hover/node:text-accent"
               }`}
             >
@@ -270,23 +269,5 @@ export default function AchievementCloud({ className = "" }: { className?: strin
         )}
       </AnimatePresence>
     </div>
-
-    {/* Mobile only: floating labels under each node collide at this size
-        (see className below), so the names live in a plain list instead. */}
-    <ul className="mt-4 flex w-full max-w-[300px] flex-col gap-2.5 font-fira-code text-xs sm:hidden">
-      {achievements.map((a) => (
-        <li key={a.id}>
-          <button
-            type="button"
-            onClick={() => toggle(a.id)}
-            className="flex w-full items-center gap-2 text-left text-fg-muted transition-colors hover:text-accent"
-          >
-            <span aria-hidden="true" className="h-1.5 w-1.5 shrink-0 rounded-full bg-accent-dim" />
-            {t.achievements.items[a.id].label}
-          </button>
-        </li>
-      ))}
-    </ul>
-    </>
   );
 }
