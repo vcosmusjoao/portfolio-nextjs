@@ -49,7 +49,8 @@ function createNoise(ctx: AudioContext): AudioBuffer {
   return buffer;
 }
 
-function blip(ctx: AudioContext, freq: number, at: number) {
+/** One short square tone — the two-note chirp when sound is switched on. */
+function chirp(ctx: AudioContext, freq: number, at: number) {
   const osc = ctx.createOscillator();
   const gain = ctx.createGain();
   osc.type = "square";
@@ -119,8 +120,8 @@ export function SoundProvider({ children }: { children: ReactNode }) {
 
     const ctx = ensureContext();
     if (ctx) {
-      blip(ctx, 660, ctx.currentTime);
-      blip(ctx, 990, ctx.currentTime + 0.07);
+      chirp(ctx, 660, ctx.currentTime);
+      chirp(ctx, 990, ctx.currentTime + 0.07);
     }
     setArmedCount((n) => n + 1);
   }, [ensureContext, setEnabled]);
