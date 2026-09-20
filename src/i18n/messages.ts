@@ -51,36 +51,35 @@ const en = {
       lines: [
         "from são paulo, brazil",
         "virgo, for whatever that's worth",
-        "horror movies — 2000 to 2010 was the golden run",
+        "horror movies, 2000 to 2010 was the golden run",
         "felines of any size pull me in",
-        "builds things that were supposed to be quick",
       ],
     },
     items: {
       backoffice: {
         label: "Back-office for analysts",
         detail:
-          "At PicPay I build the internal back-office that customer-operations analysts work in: they pick up a case, read the customer's data pulled from several systems, and approve or reject it with a justification that gets recorded.",
+          "At PicPay I joined the fraud and chargeback squad on HeroDash, the back-office platform several squads share (customer journeys, platform tooling, wallet, and mine). My squad owns the screens where an analyst picks up a case, reads the customer's data pulled from several systems, and approves or rejects it with a justification that gets recorded.",
       },
       workspace: {
         label: "Fraud workspace",
         detail:
-          "A config-driven fraud-analysis workspace that replaced per-product screens with 4 unified analysis queues across 14+ financial products.",
+          "A config-driven fraud-analysis workspace that replaced a menu of per-product screens with 4 unified analysis queues across 14+ financial products. I was one of the engineers who built and iterated on it from early on, not just maintaining it afterward.",
       },
       queues: {
         label: "−90% queue code",
         detail:
-          "Led the refactor to config-level queue delivery, cutting new-queue code by about 90% — which is what made shipping MED, the Central Bank's mandatory Pix-refund queue, fast.",
+          "Led the refactor to config-level queue delivery, cutting new-queue code by about 90%, which is what made shipping MED, the Central Bank's mandatory Pix-refund queue, fast.",
       },
       promoted: {
         label: "Promoted · new squad",
         detail:
-          "Promoted to mid-level Software Engineer in July 2026, then joined a squad building two internal platforms that replace software the company used to license: a corporate training platform, and a decision tree that guides support agents during customer conversations — my first React in production.",
+          "Promoted to mid-level Software Engineer in July 2026, then joined a squad building two internal platforms that replace software the company used to license: a corporate training platform, and a decision tree that guides support agents during customer conversations. My first React in production.",
       },
       pix: {
         label: "PIX & SPB",
         detail:
-          "At Sinqia I built Angular screens for Brazil's real-time payment rails, PIX and SPB, for banks with zero tolerance for downtime.",
+          "I joined Sinqia as an intern on the team behind their PIX and SPB products, banking software sold to banks and credit unions that weren't directly connected to the Central Bank, so they could still offer PIX to their customers. Mostly Angular front end: transaction processing, SPB monitoring, transaction search and unlock screens, plus config work with Keycloak, RabbitMQ and Jenkins, for banks with zero tolerance for downtime.",
       },
       mixordia: {
         label: "Mixórdia",
@@ -100,7 +99,7 @@ const en = {
       vizinhelp: {
         label: "vizinhelp",
         detail:
-          "My postgraduate thesis, end to end: an Angular front end, a Node API on PostgreSQL, Keycloak auth and CI deploying to AWS.",
+          "I built vizinhelp to finish my postgraduate degree in full-stack development at PUC-RS: a neighborhood app where people offer to teach or help with something, and interested neighbors reach out. I owned it end to end, Angular front end, Node API, PostgreSQL, Keycloak auth, and CI deploying to AWS.",
       },
     },
   },
@@ -118,7 +117,7 @@ const en = {
       {
         company: "PicPay",
         role: "Frontend Engineer",
-        period: "Nov 2024 — Present",
+        period: "Nov 2024 to Present",
         location: "São Paulo, Brazil",
         note: "One of Brazil's largest digital banks, with 68M+ registered users.",
         bullets: [
@@ -131,7 +130,7 @@ const en = {
       {
         company: "Sinqia",
         role: "Frontend Developer",
-        period: "Nov 2021 — Oct 2024",
+        period: "Nov 2021 to Oct 2024",
         location: "São Paulo, Brazil",
         note: "One of Brazil's largest financial software providers, serving banks and credit unions.",
         bullets: [
@@ -154,17 +153,17 @@ const en = {
       disputeAgent: {
         badge: "Personal · Live",
         description:
-          "Agentic system (LangGraph + Claude) that triages card chargebacks end to end: reasons over conflicting signals to recommend fight or accept, then drafts the representment letter itself when fighting, citing only evidence the merchant actually has. FastAPI backend, Next.js frontend, deployed as two services with real rate limiting. Same fraud/chargeback domain I work in at PicPay, tackled here with an LLM agent instead of a rules engine.",
+          "Agentic system (LangGraph + Claude) that triages card chargebacks end to end: reasons over conflicting signals to recommend fight or accept, then drafts the representment letter itself when fighting, citing only evidence the merchant actually has. FastAPI backend, Next.js frontend, deployed as two services with real rate limiting. Fraud and chargeback was the domain I used to work in at PicPay, mostly fraud, tackled here with an LLM agent instead of a rules engine.",
       },
       mixordia: {
         badge: "Freelance",
         description:
-          "Signup portal for an electronic-music events brand in Brazil. I took over a half-built React + Flask project, moved it onto Supabase — subscribers, event storage and a locked-down signup function — and built its TV power-on intro and CRT signal effects.",
+          "Signup portal for an electronic-music events brand in Brazil. I took over a half-built React + Flask project, moved it onto Supabase (subscribers, event storage and a locked-down signup function) and built its TV power-on intro and CRT signal effects.",
       },
       vizinhelp: {
         badge: "Academic",
         description:
-          "My postgraduate thesis (PUC-RS, 2024): a neighborhood skill-exchange app built end to end — Angular front end, Node/Express API on PostgreSQL, Keycloak auth and CI deploying to AWS EC2.",
+          "My postgraduate thesis (PUC-RS, 2024): a neighborhood skill-exchange app built end to end: Angular front end, Node/Express API on PostgreSQL, Keycloak auth and CI deploying to AWS EC2.",
       },
     },
     caseStudyLink: "Case study",
@@ -193,7 +192,7 @@ const en = {
   contact: {
     heading: ".contact()",
     intro:
-      "Always curious about interesting problems and the people solving them. If you want to talk tech, collaboration, or what's next, reach out.",
+      "I'm genuinely interested in people with real problems. If you need more creativity and innovation in your digital product, I can help. I'm curious and always up for it, so if you want to talk tech, collaboration, or anything else, let's connect.",
   },
   ui: {
     backToTop: "Back to top",
@@ -245,36 +244,35 @@ const pt: Messages = {
       lines: [
         "de são paulo, brasil",
         "virginiano, se é que isso diz algo",
-        "filmes de terror — de 2000 a 2010 foi a melhor fase",
+        "filmes de terror, de 2000 a 2010 foi a melhor fase",
         "felinos de qualquer tamanho me atraem",
-        "constrói coisas que eram pra ser rápidas",
       ],
     },
     items: {
       backoffice: {
         label: "Back-office dos analistas",
         detail:
-          "No PicPay eu construo o back-office interno onde os analistas de operações trabalham: eles pegam um caso, leem os dados do cliente vindos de vários sistemas e aprovam ou recusam com uma justificativa registrada.",
+          "No PicPay entrei na squad de prevenção a fraude e chargeback do HeroDash, a plataforma de back-office compartilhada por várias squads (jornadas do cliente, ferramentas da plataforma, wallet e a minha). Minha squad é dona das telas onde o analista pega um caso, lê os dados do cliente vindos de vários sistemas e aprova ou recusa com uma justificativa registrada.",
       },
       workspace: {
         label: "Workspace de fraude",
         detail:
-          "Um workspace de análise de fraude guiado por configuração, que substituiu telas por produto por 4 filas de análise unificadas em mais de 14 produtos financeiros.",
+          "Um workspace de análise de fraude guiado por configuração que substituiu um menu de telas por produto por 4 filas de análise unificadas em mais de 14 produtos financeiros. Fui um dos engenheiros que construiu e iterou nele desde o início, não só manteve depois de pronto.",
       },
       queues: {
         label: "−90% de código por fila",
         detail:
-          "Liderei o refactor para entrega de filas por configuração, reduzindo o código de uma fila nova em cerca de 90% — o que permitiu entregar rápido o MED, a fila obrigatória de devolução do Pix do Banco Central.",
+          "Liderei o refactor para entrega de filas por configuração, reduzindo o código de uma fila nova em cerca de 90%, o que permitiu entregar rápido o MED, a fila obrigatória de devolução do Pix do Banco Central.",
       },
       promoted: {
         label: "Promovido · nova squad",
         detail:
-          "Promovido a Engenheiro de Software pleno em julho de 2026 e, na sequência, entrei numa squad que constrói duas plataformas internas para substituir softwares que a empresa licenciava: uma plataforma de treinamento corporativo e uma árvore de decisão que guia os atendentes durante as conversas com clientes — meu primeiro React em produção.",
+          "Promovido a Engenheiro de Software pleno em julho de 2026 e, na sequência, entrei numa squad que constrói duas plataformas internas para substituir softwares que a empresa licenciava: uma plataforma de treinamento corporativo e uma árvore de decisão que guia os atendentes durante as conversas com clientes. Meu primeiro React em produção.",
       },
       pix: {
         label: "PIX & SPB",
         detail:
-          "Na Sinqia construí telas Angular para os trilhos de pagamento em tempo real do Brasil, PIX e SPB, para bancos com tolerância zero a indisponibilidade.",
+          "Entrei na Sinqia como estagiário, na equipe responsável pelos produtos PIX e SPB: software bancário que a Sinqia vendia para bancos e cooperativas que não eram diretamente conectados ao Banco Central, pra que pudessem oferecer o PIX aos clientes deles. Trabalhei principalmente no front-end Angular: telas de boletagem, monitor do SPB, consulta detalhada de transações e desbloqueio de transação, além de configuração com Keycloak, RabbitMQ e Jenkins, para bancos com tolerância zero a indisponibilidade.",
       },
       mixordia: {
         label: "Mixórdia",
@@ -294,7 +292,7 @@ const pt: Messages = {
       vizinhelp: {
         label: "vizinhelp",
         detail:
-          "Meu TCC da pós, de ponta a ponta: front-end em Angular, API Node sobre PostgreSQL, autenticação com Keycloak e CI publicando na AWS.",
+          "Construí a vizinhelp para finalizar minha pós-graduação em desenvolvimento full stack na PUC-RS: um app de bairro onde as pessoas oferecem pra ensinar ou ajudar com algo, e os vizinhos interessados entram em contato. Toquei o projeto de ponta a ponta: front-end em Angular, API em Node, PostgreSQL, autenticação com Keycloak e CI publicando na AWS.",
       },
     },
   },
@@ -312,7 +310,7 @@ const pt: Messages = {
       {
         company: "PicPay",
         role: "Frontend Engineer",
-        period: "Nov 2024 — Atual",
+        period: "Nov 2024 até o momento",
         location: "São Paulo, Brasil",
         note: "Um dos maiores bancos digitais do Brasil, com mais de 68 milhões de usuários registrados.",
         bullets: [
@@ -325,7 +323,7 @@ const pt: Messages = {
       {
         company: "Sinqia",
         role: "Frontend Developer",
-        period: "Nov 2021 — Out 2024",
+        period: "Nov 2021 a Out 2024",
         location: "São Paulo, Brasil",
         note: "Uma das maiores fornecedoras de software financeiro do Brasil, atendendo bancos e cooperativas de crédito.",
         bullets: [
@@ -348,17 +346,17 @@ const pt: Messages = {
       disputeAgent: {
         badge: "Pessoal · Online",
         description:
-          "Sistema agente (LangGraph + Claude) que faz a triagem de chargebacks de cartão de ponta a ponta: pondera sinais conflitantes para recomendar contestar ou aceitar e, ao contestar, redige sozinho a carta de representment (contestação), citando só a evidência que o lojista realmente tem. Backend em FastAPI, frontend em Next.js, dois serviços implantados com rate limiting real. Mesmo domínio de fraude/chargeback do meu trabalho no PicPay, aqui resolvido com um agente de IA em vez de um motor de regras.",
+          "Sistema agente (LangGraph + Claude) que faz a triagem de chargebacks de cartão de ponta a ponta: pondera sinais conflitantes para recomendar contestar ou aceitar e, ao contestar, redige sozinho a carta de representment (contestação), citando só a evidência que o lojista realmente tem. Backend em FastAPI, frontend em Next.js, dois serviços implantados com rate limiting real. Fraude e chargeback foi o domínio em que trabalhei no PicPay, principalmente fraude, resolvido aqui com um agente de IA em vez de um motor de regras.",
       },
       mixordia: {
         badge: "Freelance",
         description:
-          "Portal de inscrição para uma marca de eventos de música eletrônica no Brasil. Assumi um projeto React + Flask pela metade, migrei para o Supabase — inscritos, armazenamento dos eventos e uma função de inscrição trancada — e construí a intro de TV ligando e os efeitos de sinal CRT.",
+          "Portal de inscrição para uma marca de eventos de música eletrônica no Brasil. Assumi um projeto React + Flask pela metade, migrei para o Supabase (inscritos, armazenamento dos eventos e uma função de inscrição trancada) e construí a intro de TV ligando e os efeitos de sinal CRT.",
       },
       vizinhelp: {
         badge: "Acadêmico",
         description:
-          "Meu TCC da pós-graduação (PUC-RS, 2024): um app de troca de conhecimento entre vizinhos feito de ponta a ponta — front-end em Angular, API Node/Express sobre PostgreSQL, autenticação com Keycloak e CI publicando no AWS EC2.",
+          "Meu TCC da pós-graduação (PUC-RS, 2024): um app de troca de conhecimento entre vizinhos feito de ponta a ponta: front-end em Angular, API Node/Express sobre PostgreSQL, autenticação com Keycloak e CI publicando no AWS EC2.",
       },
     },
     caseStudyLink: "Estudo de caso",
@@ -387,7 +385,7 @@ const pt: Messages = {
   contact: {
     heading: ".contato()",
     intro:
-      "Sempre curioso sobre problemas interessantes e as pessoas que os resolvem. Se quiser falar sobre tech, colaboração ou o que vem a seguir, é só chamar.",
+      "Tenho interesse genuíno por gente com problemas reais. Se você quer dar mais criatividade e inovação ao seu produto digital, posso ajudar. Sou curioso e estou sempre disponível: se quiser falar sobre tech, colaboração ou só trocar uma ideia, vamos nos conhecer.",
   },
   ui: {
     backToTop: "Voltar ao topo",
