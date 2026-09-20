@@ -9,11 +9,6 @@ import { FiPower } from "react-icons/fi";
 export default function MixordiaCover({ className = "h-44" }: { className?: string }) {
   return (
     <div className={`relative w-full ${className} rounded-sm mb-4 overflow-hidden border border-line bg-void flex flex-col items-center justify-center gap-5`}>
-      <div
-        aria-hidden="true"
-        className="absolute bottom-0 w-40 h-24 rounded-full bg-[radial-gradient(closest-side,var(--color-signal-negative),transparent)] opacity-35"
-      />
-
       <Image
         src="/images/projects/mxd-logo.svg"
         alt="Mixórdia"
@@ -23,11 +18,17 @@ export default function MixordiaCover({ className = "h-44" }: { className?: stri
         style={{ filter: "grayscale(1) brightness(1.6)", opacity: 0.18 }}
       />
 
-      <div
-        aria-hidden="true"
-        className="relative z-10 w-9 h-9 rounded-full border-2 border-signal-negative/70 flex items-center justify-center text-signal-negative shadow-[0_0_16px_3px] shadow-signal-negative/45"
-      >
-        <FiPower className="text-base" />
+      <div className="relative flex items-center justify-center">
+        <div
+          aria-hidden="true"
+          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-28 h-28 rounded-full bg-[radial-gradient(closest-side,var(--color-signal-negative),transparent)] opacity-35"
+        />
+        <div
+          aria-hidden="true"
+          className="relative z-10 w-9 h-9 rounded-full border-2 border-signal-negative/70 flex items-center justify-center text-signal-negative shadow-[0_0_16px_3px] shadow-signal-negative/45"
+        >
+          <FiPower className="text-base" />
+        </div>
       </div>
     </div>
   );

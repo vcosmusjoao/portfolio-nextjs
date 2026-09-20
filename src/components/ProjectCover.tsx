@@ -41,6 +41,7 @@ export default function ProjectCover({ project, size }: { project: ProjectMeta; 
         width={size === "xl" ? 1440 : 800}
         height={size === "xl" ? 720 : 400}
         sizes={SIZES[size]}
+        quality={95}
         className="w-full h-full object-cover object-top"
       />
     </div>
