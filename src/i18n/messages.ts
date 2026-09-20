@@ -51,8 +51,8 @@ const en = {
       lines: [
         "from são paulo, brazil",
         "virgo, for whatever that's worth",
-        "horror movies — the older the better",
-        "owned by cats",
+        "horror movies — 2000 to 2010 was the golden run",
+        "felines of any size pull me in",
         "builds things that were supposed to be quick",
       ],
     },
@@ -245,9 +245,9 @@ const pt: Messages = {
       lines: [
         "de são paulo, brasil",
         "virginiano, se é que isso diz algo",
-        "filmes de terror — quanto mais antigos, melhor",
-        "pertenço a gatos",
-        "constrói coisas que era pra ser rápidas",
+        "filmes de terror — de 2000 a 2010 foi a melhor fase",
+        "felinos de qualquer tamanho me atraem",
+        "constrói coisas que eram pra ser rápidas",
       ],
     },
     items: {
