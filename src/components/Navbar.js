@@ -71,7 +71,7 @@ function useMenu() {
       project && id === "projects"
         ? projects.map((p) => ({
             slug: p.slug,
-            label: p.name,
+            label: p.slug,
             href: `/projects/${p.slug}`,
             current: p.slug === project.slug,
           }))
