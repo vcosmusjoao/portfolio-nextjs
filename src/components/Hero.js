@@ -5,7 +5,7 @@ import Image from "next/image";
 import { m } from "framer-motion";
 import { FiDownload } from "react-icons/fi";
 import useTerminalEffect from "@/hooks/useTerminalEffect";
-import HeroConstellation from "@/components/visuals/HeroConstellation";
+import AchievementCloud from "@/components/visuals/AchievementCloud";
 import TelemetryLabel from "@/components/TelemetryLabel";
 import { HERODASH } from "@/data/constellation";
 import { useLanguage } from "@/i18n/LanguageProvider";
@@ -92,14 +92,14 @@ export default function Hero() {
         </div>
       </m.div>
 
-      {/* Right — the monorepo drawn from its real shape, with the avatar in front */}
+      {/* Right — the achievement cloud, with the avatar behind it */}
       <m.div
         className="relative flex flex-1 items-start justify-center min-h-[300px] md:min-h-0 md:justify-end"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.8, delay: 0.3, ease: "easeOut" }}
       >
-        <HeroConstellation className="pointer-events-none w-[280px] opacity-75 sm:w-[330px] md:w-[360px] md:opacity-100 lg:w-[440px]" />
+        <AchievementCloud className="z-40 w-[300px] sm:w-[340px] md:w-[360px] lg:w-[440px]" />
         <Image
           src="/images/profile/b3a4c130-2390-4dc3-95f1-2b305cf14c2e.png"
           alt="João Costa"

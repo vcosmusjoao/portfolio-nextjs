@@ -38,6 +38,61 @@ const en = {
       "Studying AWS and AI on the side. Not everything I build runs in a terminal...",
     ],
   },
+  achievements: {
+    label: "Things I've built and shipped",
+    hint: "tap a node",
+    core: "joão",
+    seeExperience: "See it in experience",
+    readCaseStudy: "Read the case study",
+    close: "Close",
+    items: {
+      herodash: {
+        label: "HeroDash · 66 modules",
+        detail:
+          "The Angular monorepo I help build and scale at PicPay: 66 feature modules shared by 10+ squads, across fraud prevention, chargeback, lending, cards and insurance.",
+      },
+      workspace: {
+        label: "Fraud workspace",
+        detail:
+          "A config-driven fraud-analysis workspace that replaced per-product screens with 4 unified analysis queues across 14+ financial products.",
+      },
+      queues: {
+        label: "−90% queue code",
+        detail:
+          "Led the refactor to config-level queue delivery, cutting new-queue code by about 90% — which is what made shipping MED, the Central Bank's mandatory Pix-refund queue, fast.",
+      },
+      promoted: {
+        label: "Promoted · 2026",
+        detail:
+          "Promoted to mid-level Software Engineer at PicPay in July 2026 — after going from intern to junior at Sinqia in 2022.",
+      },
+      pix: {
+        label: "PIX & SPB",
+        detail:
+          "At Sinqia I built Angular screens for Brazil's real-time payment rails, PIX and SPB, for banks with zero tolerance for downtime.",
+      },
+      mixordia: {
+        label: "Mixórdia",
+        detail:
+          "Took over a half-built site for an electronic-music events brand, rebuilt it on Supabase and shipped its TV power-on intro.",
+      },
+      dispute: {
+        label: "Dispute agent",
+        detail:
+          "A LangGraph + Claude pipeline that decides whether a chargeback is worth fighting and drafts the letter, citing only evidence the merchant has.",
+      },
+      finlivre: {
+        label: "FinLivre",
+        detail:
+          "A local-first finance app I use every month: OFX parsed by code, photos read by Claude Vision, nothing leaves the browser. 112 unit tests.",
+      },
+      vizinhelp: {
+        label: "vizinhelp",
+        detail:
+          "My postgraduate thesis, end to end: an Angular front end, a Node API on PostgreSQL, Keycloak auth and CI deploying to AWS.",
+      },
+    },
+  },
   about: {
     heading: ".about()",
     paragraphs: [
@@ -165,6 +220,61 @@ const pt: Messages = {
       "Focado em Angular, TypeScript e RxJS em produção. Agora aprendendo React e Next.js...",
       "Estudando AWS e IA nas horas livres. Nem tudo que eu construo roda num terminal...",
     ],
+  },
+  achievements: {
+    label: "Coisas que construí e entreguei",
+    hint: "toque em um ponto",
+    core: "joão",
+    seeExperience: "Ver na experiência",
+    readCaseStudy: "Ler o estudo de caso",
+    close: "Fechar",
+    items: {
+      herodash: {
+        label: "HeroDash · 66 módulos",
+        detail:
+          "O monorepo Angular que ajudo a construir e escalar no PicPay: 66 módulos de feature compartilhados por mais de 10 squads, em prevenção a fraude, chargeback, crédito, cartões e seguros.",
+      },
+      workspace: {
+        label: "Workspace de fraude",
+        detail:
+          "Um workspace de análise de fraude guiado por configuração, que substituiu telas por produto por 4 filas de análise unificadas em mais de 14 produtos financeiros.",
+      },
+      queues: {
+        label: "−90% de código por fila",
+        detail:
+          "Liderei o refactor para entrega de filas por configuração, reduzindo o código de uma fila nova em cerca de 90% — o que permitiu entregar rápido o MED, a fila obrigatória de devolução do Pix do Banco Central.",
+      },
+      promoted: {
+        label: "Promovido · 2026",
+        detail:
+          "Promovido a Engenheiro de Software pleno no PicPay em julho de 2026 — depois de ir de estagiário a júnior na Sinqia em 2022.",
+      },
+      pix: {
+        label: "PIX & SPB",
+        detail:
+          "Na Sinqia construí telas Angular para os trilhos de pagamento em tempo real do Brasil, PIX e SPB, para bancos com tolerância zero a indisponibilidade.",
+      },
+      mixordia: {
+        label: "Mixórdia",
+        detail:
+          "Assumi um site pela metade de uma marca de eventos de música eletrônica, reconstruí em Supabase e entreguei a intro de TV ligando.",
+      },
+      dispute: {
+        label: "Agente de disputas",
+        detail:
+          "Um pipeline em LangGraph + Claude que decide se vale contestar um chargeback e escreve a carta, citando só evidências que o lojista tem.",
+      },
+      finlivre: {
+        label: "FinLivre",
+        detail:
+          "Um app de finanças local-first que uso todo mês: OFX lido por código, fotos lidas pelo Claude Vision, nada sai do navegador. 112 testes unitários.",
+      },
+      vizinhelp: {
+        label: "vizinhelp",
+        detail:
+          "Meu TCC da pós, de ponta a ponta: front-end em Angular, API Node sobre PostgreSQL, autenticação com Keycloak e CI publicando na AWS.",
+      },
+    },
   },
   about: {
     heading: ".sobre()",
