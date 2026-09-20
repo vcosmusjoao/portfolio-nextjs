@@ -168,11 +168,23 @@ body {
     top: 1rem;
   }
 
-  /* Hero cloud. The sky (rings + 66 faint module dots) is texture; the
-     achievement nodes and their links to the centre are the content. */
-  .constellation-rings circle {
-    stroke: var(--color-line);
-    stroke-width: 1;
+  /* Hero cloud. The 66 faint module dots and the nebula are atmosphere; the
+     achievement nodes are the content. Scattered and drifting, not orbiting. */
+  .cloud-nebula {
+    background:
+      radial-gradient(38% 34% at 42% 40%, rgb(6 182 212 / 0.1), transparent 70%),
+      radial-gradient(30% 28% at 64% 62%, rgb(14 116 144 / 0.12), transparent 70%);
+  }
+
+  .cloud-drift {
+    animation: cloud-drift var(--dur, 18s) ease-in-out infinite;
+    animation-delay: var(--delay, 0s);
+  }
+
+  /* Hold still while a card is open, so nothing wanders as you read. */
+  .is-still .cloud-drift,
+  .is-still .cloud-halo {
+    animation-play-state: paused;
   }
 
   .constellation-module {
@@ -184,37 +196,6 @@ body {
   .constellation-core {
     fill: var(--color-accent);
     filter: drop-shadow(0 0 6px var(--color-accent));
-  }
-
-  .cloud-link {
-    stroke: var(--color-line-strong);
-    stroke-width: 1;
-    opacity: 0.7;
-    transition:
-      stroke var(--duration-base) ease-out,
-      opacity var(--duration-base) ease-out;
-  }
-
-  /* A dash travelling from each achievement into the centre. pathLength="100"
-     on the line makes the same dash pattern work at any line length. */
-  .cloud-pulse {
-    stroke: var(--color-accent);
-    stroke-width: 1.2;
-    stroke-dasharray: 6 94;
-    opacity: 0.75;
-    animation: edge-pulse 3.6s linear infinite;
-    animation-delay: calc(var(--i) * -400ms);
-    transition: opacity var(--duration-base) ease-out;
-  }
-
-  .cloud-link.is-active {
-    stroke: var(--color-accent);
-    opacity: 1;
-  }
-
-  .cloud-link.is-dim,
-  .cloud-pulse.is-dim {
-    opacity: 0.12;
   }
 
   .cloud-halo {
@@ -360,18 +341,28 @@ html.boot-skip .boot-cover {
   }
 }
 
-@keyframes edge-pulse {
-  from {
-    stroke-dashoffset: 100;
+/* Each node wanders its own small loop; per-node duration and delay keep the
+   cloud from pulsing as one body. */
+@keyframes cloud-drift {
+  0%,
+  100% {
+    transform: translate(0, 0);
   }
-  to {
-    stroke-dashoffset: 0;
+  25% {
+    transform: translate(5px, -7px);
+  }
+  50% {
+    transform: translate(-4px, -3px);
+  }
+  75% {
+    transform: translate(-6px, 6px);
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
   .constellation *,
-  .cloud-halo {
+  .cloud-halo,
+  .cloud-drift {
     animation: none !important;
   }
 }

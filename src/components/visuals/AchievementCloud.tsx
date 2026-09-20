@@ -4,20 +4,20 @@ import Link from "next/link";
 import { AnimatePresence, m } from "framer-motion";
 import { useCallback, useEffect, useRef, useState, type CSSProperties } from "react";
 import { achievements, type AchievementId } from "@/data/achievements";
-import { CENTER, RINGS, skyDots, VIEWBOX } from "@/data/constellation";
+import { CENTER, skyDots, VIEWBOX } from "@/data/constellation";
 import { EASE_OUT_EXPO } from "@/components/motion/variants";
 import { useLanguage } from "@/i18n/LanguageProvider";
 
 const CARD_ID = "achievement-card";
-const toView = (pct: number) => (pct / 100) * VIEWBOX;
 
 /**
- * The hero's interactive graph: things João has built and shipped, orbiting
- * him. Each node is a real button; opening one dims the rest and expands a
- * card that links to where the achievement is told in full.
+ * The hero's interactive cloud: things João has built and shipped, drifting
+ * around him. Each node is a real button; opening one dims the rest and
+ * expands a card that links to where the achievement is told in full.
  *
- * The SVG draws the sky, rings and links; the nodes are HTML buttons laid over
- * it by percentage, so they get real focus, labels and tap targets.
+ * The SVG is only atmosphere (66 faint module dots and the core). The nodes
+ * are HTML buttons laid over it by percentage, so they get real focus, labels
+ * and tap targets. Drift pauses while a card is open.
  */
 export default function AchievementCloud({ className = "" }: { className?: string }) {
   const { t } = useLanguage();
@@ -77,15 +77,11 @@ export default function AchievementCloud({ className = "" }: { className?: strin
     <div
       role="group"
       aria-label={t.achievements.label}
-      className={`relative aspect-square ${className}`}
+      className={`relative aspect-square ${selected ? "is-still" : ""} ${className}`}
     >
-      <svg viewBox={`0 0 ${VIEWBOX} ${VIEWBOX}`} aria-hidden="true" className="constellation absolute inset-0 h-full w-full">
-        <g className="constellation-rings">
-          {RINGS.map((r) => (
-            <circle key={r} cx={CENTER} cy={CENTER} r={r} fill="none" />
-          ))}
-        </g>
+      <div aria-hidden="true" className="cloud-nebula pointer-events-none absolute inset-0" />
 
+      <svg viewBox={`0 0 ${VIEWBOX} ${VIEWBOX}`} aria-hidden="true" className="constellation absolute inset-0 h-full w-full">
         <g opacity={0.55}>
           {skyDots.map((d) => (
             <circle
@@ -98,17 +94,6 @@ export default function AchievementCloud({ className = "" }: { className?: strin
             />
           ))}
         </g>
-
-        {achievements.map((a, i) => {
-          const state = selected === a.id ? "is-active" : selected ? "is-dim" : "";
-          const line = { x1: toView(a.x), y1: toView(a.y), x2: CENTER, y2: CENTER, pathLength: 100 };
-          return (
-            <g key={a.id}>
-              <line {...line} className={`cloud-link ${state}`} />
-              <line {...line} className={`cloud-pulse ${state}`} style={{ "--i": i } as CSSProperties} />
-            </g>
-          );
-        })}
 
         <circle cx={CENTER} cy={CENTER} r={6} className="constellation-core" />
       </svg>
@@ -134,8 +119,14 @@ export default function AchievementCloud({ className = "" }: { className?: strin
         const dimmed = selected !== null && !isOpen;
         const label = t.achievements.items[a.id].label;
         return (
-          <button
+          // Wrapper holds the position; the button inside drifts, so the
+          // animation's transform can't clobber the centring translate.
+          <div
             key={a.id}
+            style={{ left: `${a.x}%`, top: `${a.y}%` }}
+            className="absolute -translate-x-1/2 -translate-y-1/2"
+          >
+          <button
             type="button"
             data-node
             ref={(el) => {
@@ -146,8 +137,8 @@ export default function AchievementCloud({ className = "" }: { className?: strin
             aria-expanded={isOpen}
             aria-controls={CARD_ID}
             aria-label={label}
-            style={{ left: `${a.x}%`, top: `${a.y}%` }}
-            className={`group/node absolute flex h-11 w-11 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full transition-opacity duration-300 ${
+            style={{ "--dur": `${a.duration}s`, "--delay": `${a.delay}s` } as CSSProperties}
+            className={`cloud-drift group/node flex h-11 w-11 items-center justify-center rounded-full transition-opacity duration-300 ${
               dimmed ? "opacity-30" : ""
             }`}
           >
@@ -172,6 +163,7 @@ export default function AchievementCloud({ className = "" }: { className?: strin
               {label}
             </span>
           </button>
+          </div>
         );
       })}
 

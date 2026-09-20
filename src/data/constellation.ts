@@ -20,9 +20,6 @@ const SPREAD = 125;
 export const VIEWBOX = 400;
 export const CENTER = VIEWBOX / 2;
 
-/** Faint concentric rings — a radar grid, deliberately recessive. */
-export const RINGS = [70, 130, 190];
-
 export const skyDots = Array.from({ length: HERODASH.modules }, (_, i) => {
   const angle = ((i * GOLDEN_ANGLE - 90) * Math.PI) / 180;
   const radius = INNER + SPREAD * Math.sqrt((i + 1) / HERODASH.modules);
