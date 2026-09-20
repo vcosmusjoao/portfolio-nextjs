@@ -7,6 +7,7 @@ import { achievements, type AchievementId } from "@/data/achievements";
 import { CENTER, skyDots, VIEWBOX } from "@/data/constellation";
 import { EASE_OUT_EXPO } from "@/components/motion/variants";
 import { useLanguage } from "@/i18n/LanguageProvider";
+import { useSound } from "@/audio/SoundProvider";
 
 const CARD_ID = "achievement-card";
 
@@ -21,6 +22,7 @@ const CARD_ID = "achievement-card";
  */
 export default function AchievementCloud({ className = "" }: { className?: string }) {
   const { t } = useLanguage();
+  const { note } = useSound();
   const [selected, setSelected] = useState<AchievementId | null>(null);
   const [touched, setTouched] = useState(false);
   const closeRef = useRef<HTMLButtonElement>(null);
@@ -134,6 +136,8 @@ export default function AchievementCloud({ className = "" }: { className?: strin
               else nodeRefs.current.delete(a.id);
             }}
             onClick={() => toggle(a.id)}
+            onPointerEnter={() => note(i)}
+            onFocus={() => note(i)}
             aria-expanded={isOpen}
             aria-controls={CARD_ID}
             aria-label={label}

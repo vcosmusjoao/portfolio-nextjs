@@ -18,9 +18,17 @@ interface SoundContextValue {
   toggle: () => void;
   /** One keystroke. Silent unless the user has switched sound on. */
   click: () => void;
+  /** One note from the scale below, by index — sweeping the cloud plays a tune. */
+  note: (index: number) => void;
   /** Increments each time sound is switched on — lets the hero re-type once. */
   armedCount: number;
 }
+
+/**
+ * C major pentatonic. It has no semitone clashes, so the notes sound musical
+ * in any order — whichever way a visitor sweeps across the cloud.
+ */
+const SCALE = [523.25, 587.33, 659.25, 783.99, 880.0, 1046.5, 1174.66, 1318.51, 1567.98];
 
 const SoundContext = createContext<SoundContextValue | null>(null);
 
@@ -70,6 +78,7 @@ export function SoundProvider({ children }: { children: ReactNode }) {
   const ctxRef = useRef<AudioContext | null>(null);
   const noiseRef = useRef<AudioBuffer | null>(null);
   const lastClickRef = useRef(0);
+  const lastNoteRef = useRef(0);
 
   const ensureContext = useCallback(() => {
     if (!ctxRef.current) {
@@ -139,8 +148,30 @@ export function SoundProvider({ children }: { children: ReactNode }) {
     source.start(t);
   }, []);
 
+  const note = useCallback((index: number) => {
+    const ctx = ctxRef.current;
+    if (!enabledRef.current || !ctx || ctx.state !== "running") return;
+
+    const now = performance.now();
+    if (now - lastNoteRef.current < 70) return;
+    lastNoteRef.current = now;
+
+    const t = ctx.currentTime;
+    const osc = ctx.createOscillator();
+    const gain = ctx.createGain();
+    osc.type = "sine";
+    osc.frequency.value = SCALE[index % SCALE.length];
+    // Short swell then decay, so a quick sweep sounds plucked rather than buzzy.
+    gain.gain.setValueAtTime(0.0001, t);
+    gain.gain.exponentialRampToValueAtTime(0.05, t + 0.02);
+    gain.gain.exponentialRampToValueAtTime(0.0001, t + 0.28);
+    osc.connect(gain).connect(ctx.destination);
+    osc.start(t);
+    osc.stop(t + 0.3);
+  }, []);
+
   return (
-    <SoundContext.Provider value={{ enabled, toggle, click, armedCount }}>
+    <SoundContext.Provider value={{ enabled, toggle, click, note, armedCount }}>
       {children}
     </SoundContext.Provider>
   );
