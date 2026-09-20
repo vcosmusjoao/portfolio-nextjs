@@ -16,6 +16,16 @@ export default function Hero() {
   const { click, armedCount } = useSound();
   const terminalRef = useRef(null);
   const [replay, setReplay] = useState(0);
+  const [instant, setInstant] = useState(false);
+
+  // Type once per session: coming back from a case study shouldn't replay ~15s
+  // of typing. The flag is written when it finishes, not when it starts, so
+  // StrictMode's double mount in development doesn't suppress the first run.
+  useEffect(() => {
+    try {
+      if (window.sessionStorage.getItem("portfolio.typed") === "1") setInstant(true);
+    } catch {}
+  }, []);
 
   // The terminal has usually finished typing before anyone finds the sound
   // toggle, so switching sound on re-types it once — only if it's on screen,
@@ -23,10 +33,20 @@ export default function Hero() {
   useEffect(() => {
     if (!armedCount) return;
     const box = terminalRef.current?.getBoundingClientRect();
-    if (box && box.top < window.innerHeight && box.bottom > 0) setReplay((n) => n + 1);
+    if (box && box.top < window.innerHeight && box.bottom > 0) {
+      setInstant(false);
+      setReplay((n) => n + 1);
+    }
   }, [armedCount]);
 
-  const { output, done } = useTerminalEffect(t.hero.terminal, 60, 800, click, replay);
+  const { output, done } = useTerminalEffect(t.hero.terminal, 60, 800, click, replay, instant);
+
+  useEffect(() => {
+    if (!done) return;
+    try {
+      window.sessionStorage.setItem("portfolio.typed", "1");
+    } catch {}
+  }, [done]);
 
   return (
     <section id="home" className="relative w-full min-h-[calc(100vh-3rem)] flex flex-col md:flex-row">

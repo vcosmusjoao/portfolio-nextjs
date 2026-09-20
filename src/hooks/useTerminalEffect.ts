@@ -4,6 +4,8 @@ import { useState, useEffect, useRef } from "react";
  * @param onChar called once per typed character; kept in a ref so passing a
  *   new function does not restart the typing.
  * @param replayKey change it to type the lines again from the start.
+ * @param instant skip the animation and show the finished lines — used when
+ *   the visitor has already watched them type earlier in the session.
  */
 export default function useTerminalEffect(
   lines: string[],
@@ -11,6 +13,7 @@ export default function useTerminalEffect(
   delayBetween = 600,
   onChar?: (char: string) => void,
   replayKey = 0,
+  instant = false,
 ) {
   const [output, setOutput] = useState<string[]>([]);
   const [done, setDone] = useState(false);
@@ -18,6 +21,12 @@ export default function useTerminalEffect(
   onCharRef.current = onChar;
 
   useEffect(() => {
+    if (instant) {
+      setOutput(lines);
+      setDone(true);
+      return;
+    }
+
     let lineIndex = 0;
     let charIndex = 0;
     let intervalId: ReturnType<typeof setInterval> | undefined;
@@ -75,7 +84,7 @@ export default function useTerminalEffect(
     };
   // Re-run (and re-type) when the lines change — e.g. on a language switch.
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [lines.join(" "), speed, delayBetween, replayKey]);
+  }, [lines.join(" "), speed, delayBetween, replayKey, instant]);
 
   return { output, done };
 }
