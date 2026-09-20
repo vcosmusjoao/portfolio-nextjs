@@ -20,6 +20,8 @@ interface SoundContextValue {
   click: () => void;
   /** One note from the scale below, by index — sweeping the cloud plays a tune. */
   note: (index: number) => void;
+  /** A quiet tick for hovering small things like chips. */
+  blip: () => void;
   /** Increments each time sound is switched on — lets the hero re-type once. */
   armedCount: number;
 }
@@ -79,6 +81,7 @@ export function SoundProvider({ children }: { children: ReactNode }) {
   const noiseRef = useRef<AudioBuffer | null>(null);
   const lastClickRef = useRef(0);
   const lastNoteRef = useRef(0);
+  const lastBlipRef = useRef(0);
 
   const ensureContext = useCallback(() => {
     if (!ctxRef.current) {
@@ -170,8 +173,36 @@ export function SoundProvider({ children }: { children: ReactNode }) {
     osc.stop(t + 0.3);
   }, []);
 
+  /**
+   * Deliberately quieter and shorter than `note`: chips are everywhere, so
+   * hovering a row of them should whisper, not play a tune.
+   */
+  const blip = useCallback(() => {
+    const ctx = ctxRef.current;
+    if (!enabledRef.current || !ctx || ctx.state !== "running") return;
+
+    const now = performance.now();
+    if (now - lastBlipRef.current < 80) return;
+    lastBlipRef.current = now;
+
+    const t = ctx.currentTime;
+    const osc = ctx.createOscillator();
+    const filter = ctx.createBiquadFilter();
+    const gain = ctx.createGain();
+    osc.type = "triangle";
+    osc.frequency.value = 1280 + Math.random() * 160;
+    filter.type = "lowpass";
+    filter.frequency.value = 2600;
+    gain.gain.setValueAtTime(0.0001, t);
+    gain.gain.exponentialRampToValueAtTime(0.018, t + 0.012);
+    gain.gain.exponentialRampToValueAtTime(0.0001, t + 0.12);
+    osc.connect(filter).connect(gain).connect(ctx.destination);
+    osc.start(t);
+    osc.stop(t + 0.14);
+  }, []);
+
   return (
-    <SoundContext.Provider value={{ enabled, toggle, click, note, armedCount }}>
+    <SoundContext.Provider value={{ enabled, toggle, click, note, blip, armedCount }}>
       {children}
     </SoundContext.Provider>
   );
