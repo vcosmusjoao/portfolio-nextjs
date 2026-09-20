@@ -4,12 +4,15 @@ import Link from "next/link";
 import { AnimatePresence, m } from "framer-motion";
 import { useCallback, useEffect, useRef, useState, type CSSProperties } from "react";
 import { achievements, type AchievementId } from "@/data/achievements";
-import { CENTER, skyDots, VIEWBOX } from "@/data/constellation";
+import { skyDots, VIEWBOX } from "@/data/constellation";
 import { EASE_OUT_EXPO } from "@/components/motion/variants";
 import { useLanguage } from "@/i18n/LanguageProvider";
 import { useSound } from "@/audio/SoundProvider";
 
 const CARD_ID = "achievement-card";
+
+/** The centre is selectable too, and tells you who this is. */
+type Selected = AchievementId | "whoami" | null;
 
 /**
  * The hero's interactive cloud: things João has built and shipped, drifting
@@ -23,14 +26,14 @@ const CARD_ID = "achievement-card";
 export default function AchievementCloud({ className = "" }: { className?: string }) {
   const { t } = useLanguage();
   const { note } = useSound();
-  const [selected, setSelected] = useState<AchievementId | null>(null);
+  const [selected, setSelected] = useState<Selected>(null);
   const [touched, setTouched] = useState(false);
   const closeRef = useRef<HTMLButtonElement>(null);
-  const nodeRefs = useRef(new Map<AchievementId, HTMLButtonElement>());
-  const lastOpened = useRef<AchievementId | null>(null);
+  const nodeRefs = useRef(new Map<string, HTMLButtonElement>());
+  const lastOpened = useRef<Selected>(null);
   const returnFocus = useRef(false);
 
-  const toggle = (id: AchievementId) => {
+  const toggle = (id: Exclude<Selected, null>) => {
     setTouched(true);
     setSelected((current) => (current === id ? null : id));
   };
@@ -72,8 +75,18 @@ export default function AchievementCloud({ className = "" }: { className?: strin
     };
   }, [selected, close]);
 
-  const open = achievements.find((a) => a.id === selected);
+  const open = achievements.find((a) => a.id === selected) ?? null;
+  const isWhoami = selected === "whoami";
   const copy = open ? t.achievements.items[open.id] : null;
+  const card = isWhoami
+    ? { title: t.achievements.whoami.label, href: "/#about", linkLabel: t.achievements.aboutMe }
+    : open && copy
+      ? {
+          title: copy.label,
+          href: open.href,
+          linkLabel: open.kind === "project" ? t.achievements.readCaseStudy : t.achievements.seeExperience,
+        }
+      : null;
 
   return (
     <div
@@ -97,15 +110,38 @@ export default function AchievementCloud({ className = "" }: { className?: strin
           ))}
         </g>
 
-        <circle cx={CENTER} cy={CENTER} r={6} className="constellation-core" />
       </svg>
 
-      <span
-        aria-hidden="true"
-        className="pointer-events-none absolute left-1/2 top-[53%] -translate-x-1/2 font-fira-code text-[10px] tracking-[0.18em] uppercase text-fg-faint"
+      <button
+        type="button"
+        data-node
+        ref={(el) => {
+          if (el) nodeRefs.current.set("whoami", el);
+          else nodeRefs.current.delete("whoami");
+        }}
+        onClick={() => toggle("whoami")}
+        onPointerEnter={() => note(0)}
+        onFocus={() => note(0)}
+        aria-expanded={selected === "whoami"}
+        aria-controls={CARD_ID}
+        aria-label={t.achievements.whoami.label}
+        className={`group/core absolute left-1/2 top-1/2 flex h-12 w-12 -translate-x-1/2 -translate-y-1/2 flex-col items-center justify-center gap-1 rounded-full transition-opacity duration-300 ${
+          selected && selected !== "whoami" ? "opacity-30" : ""
+        }`}
       >
-        {t.achievements.core}
-      </span>
+        <span
+          aria-hidden="true"
+          className={`h-3.5 w-3.5 rounded-full bg-accent shadow-[0_0_16px_4px] shadow-accent/60 transition-transform duration-300 ${
+            selected === "whoami" ? "scale-150" : "group-hover/core:scale-125"
+          }`}
+        />
+        <span
+          aria-hidden="true"
+          className="font-fira-code text-[10px] uppercase tracking-[0.18em] text-fg-faint transition-colors group-hover/core:text-accent"
+        >
+          {t.achievements.core}
+        </span>
+      </button>
 
       {!touched && (
         <p
@@ -172,9 +208,9 @@ export default function AchievementCloud({ className = "" }: { className?: strin
       })}
 
       <AnimatePresence mode="wait">
-        {open && copy && (
+        {card && (
           <m.div
-            key={open.id}
+            key={selected}
             className="pointer-events-none absolute inset-0 z-20 flex items-center justify-center"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -195,7 +231,7 @@ export default function AchievementCloud({ className = "" }: { className?: strin
             >
               <div className="mb-2 flex items-start justify-between gap-3">
                 <p id={`${CARD_ID}-title`} className="font-fira-code text-sm text-accent">
-                  {copy.label}
+                  {card.title}
                 </p>
                 <button
                   ref={closeRef}
@@ -207,13 +243,26 @@ export default function AchievementCloud({ className = "" }: { className?: strin
                   ×
                 </button>
               </div>
-              <p className="mb-3 text-sm leading-relaxed text-fg-muted">{copy.detail}</p>
+              {isWhoami ? (
+                <ul className="mb-3 space-y-1 font-fira-code text-xs leading-relaxed text-fg-muted">
+                  {t.achievements.whoami.lines.map((line) => (
+                    <li key={line} className="flex gap-2">
+                      <span aria-hidden="true" className="text-fg-faint">
+                        ▸
+                      </span>
+                      {line}
+                    </li>
+                  ))}
+                </ul>
+              ) : (
+                <p className="mb-3 text-sm leading-relaxed text-fg-muted">{copy?.detail}</p>
+              )}
               <Link
-                href={open.href}
+                href={card.href}
                 onClick={() => close(false)}
                 className="font-fira-code text-xs text-accent hover:text-accent-bright hover:underline"
               >
-                {open.kind === "project" ? t.achievements.readCaseStudy : t.achievements.seeExperience} →
+                {card.linkLabel} →
               </Link>
             </m.div>
           </m.div>

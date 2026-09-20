@@ -16,7 +16,7 @@ export interface Achievement {
 }
 
 const entries: Omit<Achievement, "x" | "y" | "duration" | "delay">[] = [
-  { id: "herodash", href: "/#experience", kind: "experience" },
+  { id: "backoffice", href: "/#experience", kind: "experience" },
   { id: "workspace", href: "/#experience", kind: "experience" },
   { id: "queues", href: "/#experience", kind: "experience" },
   { id: "promoted", href: "/#experience", kind: "experience" },

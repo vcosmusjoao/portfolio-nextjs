@@ -41,15 +41,26 @@ const en = {
   achievements: {
     label: "Things I've built and shipped",
     hint: "tap a node",
-    core: "joão",
+    core: "whoami",
     seeExperience: "See it in experience",
     readCaseStudy: "Read the case study",
+    aboutMe: "More about me",
     close: "Close",
+    whoami: {
+      label: "joão",
+      lines: [
+        "from são paulo, brazil",
+        "virgo, for whatever that's worth",
+        "horror movies — the older the better",
+        "owned by cats",
+        "builds things that were supposed to be quick",
+      ],
+    },
     items: {
-      herodash: {
-        label: "HeroDash · 66 modules",
+      backoffice: {
+        label: "Back-office for analysts",
         detail:
-          "The Angular monorepo I help build and scale at PicPay: 66 feature modules shared by 10+ squads, across fraud prevention, chargeback, lending, cards and insurance.",
+          "At PicPay I build the internal back-office that customer-operations analysts work in: they pick up a case, read the customer's data pulled from several systems, and approve or reject it with a justification that gets recorded.",
       },
       workspace: {
         label: "Fraud workspace",
@@ -62,9 +73,9 @@ const en = {
           "Led the refactor to config-level queue delivery, cutting new-queue code by about 90% — which is what made shipping MED, the Central Bank's mandatory Pix-refund queue, fast.",
       },
       promoted: {
-        label: "Promoted · 2026",
+        label: "Promoted · new squad",
         detail:
-          "Promoted to mid-level Software Engineer at PicPay in July 2026 — after going from intern to junior at Sinqia in 2022.",
+          "Promoted to mid-level Software Engineer in July 2026, then joined a squad building two internal platforms that replace software the company used to license: a corporate training platform, and a decision tree that guides support agents during customer conversations — my first React in production.",
       },
       pix: {
         label: "PIX & SPB",
@@ -224,15 +235,26 @@ const pt: Messages = {
   achievements: {
     label: "Coisas que construí e entreguei",
     hint: "toque em um ponto",
-    core: "joão",
+    core: "whoami",
     seeExperience: "Ver na experiência",
     readCaseStudy: "Ler o estudo de caso",
+    aboutMe: "Mais sobre mim",
     close: "Fechar",
+    whoami: {
+      label: "joão",
+      lines: [
+        "de são paulo, brasil",
+        "virginiano, se é que isso diz algo",
+        "filmes de terror — quanto mais antigos, melhor",
+        "pertenço a gatos",
+        "constrói coisas que era pra ser rápidas",
+      ],
+    },
     items: {
-      herodash: {
-        label: "HeroDash · 66 módulos",
+      backoffice: {
+        label: "Back-office dos analistas",
         detail:
-          "O monorepo Angular que ajudo a construir e escalar no PicPay: 66 módulos de feature compartilhados por mais de 10 squads, em prevenção a fraude, chargeback, crédito, cartões e seguros.",
+          "No PicPay eu construo o back-office interno onde os analistas de operações trabalham: eles pegam um caso, leem os dados do cliente vindos de vários sistemas e aprovam ou recusam com uma justificativa registrada.",
       },
       workspace: {
         label: "Workspace de fraude",
@@ -245,9 +267,9 @@ const pt: Messages = {
           "Liderei o refactor para entrega de filas por configuração, reduzindo o código de uma fila nova em cerca de 90% — o que permitiu entregar rápido o MED, a fila obrigatória de devolução do Pix do Banco Central.",
       },
       promoted: {
-        label: "Promovido · 2026",
+        label: "Promovido · nova squad",
         detail:
-          "Promovido a Engenheiro de Software pleno no PicPay em julho de 2026 — depois de ir de estagiário a júnior na Sinqia em 2022.",
+          "Promovido a Engenheiro de Software pleno em julho de 2026 e, na sequência, entrei numa squad que constrói duas plataformas internas para substituir softwares que a empresa licenciava: uma plataforma de treinamento corporativo e uma árvore de decisão que guia os atendentes durante as conversas com clientes — meu primeiro React em produção.",
       },
       pix: {
         label: "PIX & SPB",
