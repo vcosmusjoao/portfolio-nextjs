@@ -119,7 +119,19 @@ export default function Hero() {
         animate={{ opacity: 1 }}
         transition={{ duration: 0.8, delay: 0.3, ease: "easeOut" }}
       >
-        <AchievementCloud className="z-40 w-[300px] sm:w-[340px] md:w-[360px] lg:w-[440px]" />
+        <div className="flex flex-col items-center">
+          <AchievementCloud className="z-40 w-[300px] sm:w-[340px] md:w-[360px] lg:w-[440px]" />
+          {/* Mobile only: the desktop avatar below overlaps the cloud on
+              purpose, which only works once there's room beside it. */}
+          <Image
+            src="/images/profile/b3a4c130-2390-4dc3-95f1-2b305cf14c2e.png"
+            alt="João Costa"
+            width={200}
+            height={200}
+            sizes="140px"
+            className="mt-4 w-28 object-contain pointer-events-none select-none opacity-90 sm:hidden"
+          />
+        </div>
         <Image
           src="/images/profile/b3a4c130-2390-4dc3-95f1-2b305cf14c2e.png"
           alt="João Costa"

@@ -89,6 +89,7 @@ export default function AchievementCloud({ className = "" }: { className?: strin
       : null;
 
   return (
+    <>
     <div
       role="group"
       aria-label={t.achievements.label}
@@ -269,5 +270,23 @@ export default function AchievementCloud({ className = "" }: { className?: strin
         )}
       </AnimatePresence>
     </div>
+
+    {/* Mobile only: floating labels under each node collide at this size
+        (see className below), so the names live in a plain list instead. */}
+    <ul className="mt-4 grid w-full max-w-[300px] grid-cols-2 gap-x-4 gap-y-2 font-fira-code text-xs sm:hidden">
+      {achievements.map((a) => (
+        <li key={a.id}>
+          <button
+            type="button"
+            onClick={() => toggle(a.id)}
+            className="flex w-full items-center gap-2 text-left text-fg-muted transition-colors hover:text-accent"
+          >
+            <span aria-hidden="true" className="h-1.5 w-1.5 shrink-0 rounded-full bg-accent-dim" />
+            {t.achievements.items[a.id].label}
+          </button>
+        </li>
+      ))}
+    </ul>
+    </>
   );
 }
